@@ -100,12 +100,18 @@ def get_pages(soup):
     return soup.find('ul', {'class': 'pagination inline pull-xs-none pull-sm-right'}).findAll('li')[-2].find('a').text
 
 
-def chrono24_result_page():
+def chrono24_result_page(watch_brand, output_file):
     """Scrapes the result page of Chrono24 for main details and href links
 
+    :param watch_brand: the watch brand to scrape pages of from Chrono24
+    :type watch_brand: str
+    :param output_file: the .csv file where all the information should be stored
+    :type output_file: str
+
+    :rtype: .csv file
     returns: watch_id|watch_manufacturer|watch_title|watch_currency|watch_price|href
     """
-    soup = parse_url('https://www.chrono24.com/{0}/index-{1}.htm'.format('rolex', 1))
+    soup = parse_url('https://www.chrono24.com/{0}/index-{1}.htm'.format(watch_brand, 1))
     page_nr = int(get_pages(soup))
 
     proxies = get_proxies()
@@ -113,7 +119,7 @@ def chrono24_result_page():
     print('Scraping {0} pages with {1} proxies.'.format(page_nr, proxies_nr))
     proxy_pool = cycle(proxies)
 
-    with open('spacy_pages.csv', 'a') as spacy_rolex:
+    with open(output_file, 'a') as spacy_rolex:
         if len(open('spacy_pages.csv').readlines()) < 1:
             spacy_rolex.write('watch_id|watch_manufacturer|watch_title|watch_currency|watch_price|href\n')
 
@@ -155,11 +161,19 @@ def chrono24_result_page():
     return "Succesfully scraped {0} pages.".format(page_nr)
 
 
-def main():
+def scrape_chrono24(csv_main_details):
+    """Scrape all watch information from detail-page of Chrono24
+    with links from csv file input
 
 
+    :param csv_main_details: the .csv file with the information and links from Chrono24 main-detail page
+    :type csv_main_details: str
 
-    with open("spacy_pages.csv") as result_page:
+    :rtype: .json file with all details
+    :return: list of json dictionary with all details per watch listing
+    """
+
+    with open(csv_main_details) as result_page:
         next(result_page)
 
         page_nr = len(open('spacy_pages.csv').readlines())
@@ -168,7 +182,7 @@ def main():
         start = time.time()
         for idx, line in enumerate(result_page):
 
-            if idx % 1000 == 0 and idx is not 0:
+            if idx % 1000 == 0 and idx != 0:
                 print("first {0} took {1}.".format(idx, round(time.time()-start), 2))
 
             line = line.rstrip('\n').split('|')
@@ -233,6 +247,13 @@ def main():
             '''description is loaded dynamically, need selenium for that...'''
 
             # print('Page {0} finished.'.format(idx+1))
+
+
+def main():
+
+    chrono24_result_page('rolex', 'spacy_pages.csv')
+
+    scrape_chrono24('spacy_pages.csv')
 
 
 if __name__ == '__main__':
