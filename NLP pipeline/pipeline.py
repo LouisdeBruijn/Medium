@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # File name: pipeline.py
-# Description: An exemplary NLP pipiline with scikit-learn
+# Description: An exemplary NLP pipeline with scikit-learn
 # Authors: Louis de Bruijn & Gaetana Ruggiero
 # Date: 11-03-2020
 
