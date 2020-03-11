@@ -180,7 +180,6 @@ def feature_union(count, tfidf, textstats):
 
     vec = FeatureUnion(features)
     classifier = Pipeline([('vec', vec), ('cls', MultinomialNB())])
-    print(type(classifier))
 
     return classifier
 
