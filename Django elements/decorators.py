@@ -2,12 +2,12 @@ from functools import wraps
 from django.contrib import messages
 from django.contrib.auth.views import redirect_to_login
 from django.contrib.auth import REDIRECT_FIELD_NAME
-from journal.settings import config
-import requests
 
-import journal.settings as settings
-from urllib.parse import urlparse
 from django.shortcuts import resolve_url
+from urllib.parse import urlparse
+from [projectname].settings import config
+import [projectname].settings as settings
+import requests
 
 default_message = 'Unauthorised action.'
 unauthenticated_message = 'User already logged in.'
