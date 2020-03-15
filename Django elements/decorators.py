@@ -24,7 +24,7 @@ def user_passes_test(test_func, login_url=None, redirect_field_name=REDIRECT_FIE
         @wraps(view_func)
         def _wrapped_view(request, *args, **kwargs):
             if not test_func(request.user):
-                messages.error(request, message)
+                messages.add_message(request, messages.ERROR, message)
             if test_func(request.user):
                 return view_func(request, *args, **kwargs)
             path = request.build_absolute_uri()
@@ -61,7 +61,7 @@ def check_recaptcha(view_func):
                 request.recaptcha_is_valid = True
             else:
                 request.recaptcha_is_valid = False
-                messages.ERROR(request, 'Invalid reCAPTCHA. Please try again.')
+                messages.add_message(request, messages.ERROR, 'Invalid reCAPTCHA. Please try again.')
         return view_func(request, *args, **kwargs)
     return _wrapped_view
 
