@@ -40,6 +40,20 @@ document.body.addEventListener( 'click', function (event) {
     }
 });
 
+
+// fade out message alerts
+function fade_alerts() {
+    alerts = document.getElementsByClassName("alert msg");
+        var i = alerts.length;
+        for (let elem of alerts) {
+            i--;
+            time = 3250+(1000*i);
+            setTimeout(function() {
+                $(elem).fadeOut("slow");
+            }, time);
+        }
+}
+
 // Simulate a click on radio-button so that it loads demographic content
 var hatEvalData = document.getElementById("dataset_a");
 hatEvalData.click();
