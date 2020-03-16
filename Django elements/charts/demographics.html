@@ -1,0 +1,54 @@
+<section>
+    <small class="form-text text-muted">Choose a dataset</small>
+        <form action="{% url 'demographics' %}" class="" method="POST">
+            {% csrf_token %}
+            <div class="form-check form-check-inline">
+                <input class="form-check-input dataset" type="radio" name="dataset" id="dataset_a" value="a" checked>
+                <label class="form-check-label" for="dataset_a">
+                    Dataset A
+                </label>
+            </div>
+                <div class="form-check form-check-inline">
+                <input class="form-check-input dataset" type="radio" name="dataset" id="dataset_b" value="b">
+                <label class="form-check-label" for="dataset_b">
+                    Dataset B
+                </label>
+            </div>
+                <div class="form-check form-check-inline">
+                <input class="form-check-input dataset" type="radio" name="dataset" id="both_datasets" value="all">
+                <label class="form-check-label" for="both_datasets">
+                    both datasets
+                </label>
+            </div>
+
+    <small class="form-text text-muted">Choose a label</small>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input dataset" type="radio" name="label" id="positive_class" value="pos">
+            <label class="form-check-label" for="positive_class">
+                positive class
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input dataset" type="radio" name="label" id="negative_class" value="neg">
+            <label class="form-check-label" for="negative_class">
+                negative class
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input dataset" type="radio" name="label" id="both_class" value="all" checked>
+            <label class="form-check-label" for="both_class">
+                both classes
+            </label>
+        </div>
+    </form>
+</section>
+
+<section>
+    <div id="demographics-container">
+        <div id="demographics-content">
+        </div>
+    </div>
+</section>
+
+<script src="{% static 'scripts/request.js' %}"></script>
+<script src="{% static 'scripts/chart.js' %}"></script>
