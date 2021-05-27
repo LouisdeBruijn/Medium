@@ -74,7 +74,7 @@ def equal_array_items(x: List) -> bool:
     """Compares whether all array items are of the same type and content.
 
     Args:
-        x (List): array to compare list items in.
+        x (List): an array to compare list items in.
 
     Examples:
 
