@@ -2,7 +2,7 @@
 
 
 ### print_df
-[source](https://github.com/LouisdeBruijn/Medium.git/blob/master/Python tips/base.py/#L28)
+[source](https://github.com/LouisdeBruijn/Medium/blob/master/Python tips/base.py/#L28)
 ```python
 .print_df(
    df: pd.DataFrame, rows: int, exit_script: bool = False
@@ -24,7 +24,7 @@ Prints a DataFrame.
 
 
 ### unescape_html
-[source](https://github.com/LouisdeBruijn/Medium.git/blob/master/Python tips/base.py/#L43)
+[source](https://github.com/LouisdeBruijn/Medium/blob/master/Python tips/base.py/#L43)
 ```python
 .unescape_html(
    text: str
@@ -70,7 +70,7 @@ Example of HTML entities found during annotations::
 
 
 ### equal_array_items
-[source](https://github.com/LouisdeBruijn/Medium.git/blob/master/Python tips/base.py/#L73)
+[source](https://github.com/LouisdeBruijn/Medium/blob/master/Python tips/base.py/#L73)
 ```python
 .equal_array_items(
    x: List
