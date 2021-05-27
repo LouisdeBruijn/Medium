@@ -1,0 +1,5 @@
+pre-commit==2.13.0
+black==21.5b1
+isort==5.8.0
+pep8-naming==0.11.1
+autoflake==1.4
