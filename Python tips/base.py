@@ -7,6 +7,8 @@ from typing import List
 
 import pandas as pd
 
+a = 22
+
 
 def parse_arguments():
     """Read arguments from a command line."""
