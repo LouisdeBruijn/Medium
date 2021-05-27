@@ -10,8 +10,3 @@ pages:
       - print_df
       - unescape_html
       - equal_array_items
-
-#  # creates an index page
-#  - page: "scripts/index.md"
-#    source: "base.py"
-#    index: true

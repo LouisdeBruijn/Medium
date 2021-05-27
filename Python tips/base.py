@@ -78,11 +78,11 @@ def equal_array_items(x: List) -> bool:
 
     Examples:
 
-        >>> equal_array_items([{'end': 20, 'labels': ['NORP'], 'start': 13, 'text': 'english'}
-        >>> , {'end': 20, 'labels': ['NORP'], 'start': 13, 'text': 'english'}])
+        >>> equal_array_items([{'end': 20, 'labels': ['NORP'], 'start': 13, 'text': 'english'} \
+        , {'end': 20, 'labels': ['NORP'], 'start': 13, 'text': 'english'}])
         True
-        >>> equal_array_items([{'end': 20, 'labels': ['NORP'], 'start': 13, 'text': 'english'}
-        >>> , {'end': 20, 'labels': ['LOCATION'], 'start': 13, 'text': 'english'}])
+        >>> equal_array_items([{'end': 20, 'labels': ['NORP'], 'start': 13, 'text': 'english'} \
+        , {'end': 20, 'labels': ['LOCATION'], 'start': 13, 'text': 'english'}])
         False
 
     Returns:
