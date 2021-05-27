@@ -8,7 +8,7 @@ repos:
     hooks:
     - id: autoflake
       name: Remove unused variables and imports
-      entry: autoflake
+      entry: bash -c 'autoflake "$@"; git add -u'
       language: python
       args: ['--in-place', '--remove-all-unused-imports', '--remove-unused-variable']
       files: \.py$
