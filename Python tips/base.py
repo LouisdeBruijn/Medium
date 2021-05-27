@@ -78,6 +78,8 @@ def equal_array_items(x: List) -> bool:
 
     Examples:
 
+        Example of difference in dictionary key-value pairs::
+
         >>> equal_array_items([{'e': 20, 'l': ['NORP'], 't': 'nl'}, {'e': 20, 'l': ['NORP'], 't': 'nl'}])
         True
         >>> equal_array_items([{'e': 20, 'l': ['LOC'], 't': 'nl'}, {'e': 20, 'l': ['NORP'], 't': 'nl'}])

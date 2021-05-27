@@ -91,6 +91,8 @@ Compares whether all array items are of the same type and content.
 * 20, 'l': ['NORP'], 't': 'nl'}, {'e': 20, 'l': ['NORP'], 't': 'nl'}])
 * 20, 'l': ['LOC'], 't': 'nl'}, {'e': 20, 'l': ['NORP'], 't': 'nl'}])
 
+Example of difference in dictionary key-value pairs::
+
 True
 False
 
