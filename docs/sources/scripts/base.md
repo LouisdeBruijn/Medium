@@ -89,7 +89,7 @@ Converts any HTML entities found in text to their textual representation.
 **Examples**
 
 
-Example of HTML entities found during annotations::
+Examples of equal and unequal array items::
 
 
 ```python

@@ -33,7 +33,7 @@ repos:
       args: ["--max-line-length=120", "--ignore=D100,D104,E402,W503"]
     - id: mkgendocs
       name: Generate markdown from docstrings
-      entry: bash -c "gendocs --config 'mkgendocs.yml'"
+      entry: bash -c "gendocs --config 'mkgendocs.yml'; git add -u"
       language: system
       types: [python]
     - id: mkserve

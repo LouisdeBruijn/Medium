@@ -78,7 +78,7 @@ def equal_array_items(x: List) -> bool:
 
     Examples:
 
-        Example of HTML entities found during annotations::
+        Examples of equal and unequal array items::
 
         >>> equal_array_items(["1", "1"])
         True
