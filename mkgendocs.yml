@@ -1,4 +1,4 @@
-sources_dir: docs/sources
+sources_dir: docs
 templates_dir: docs/templates
 repo: https://github.com/LouisdeBruijn/Medium
 version: master

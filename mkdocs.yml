@@ -14,7 +14,7 @@ extra:
 
 theme:
     name: material
-    custom_dir: docs/assets/theme/
+    custom_dir: docs_assets/theme/
     palette:
         # scheme: preference uses dark or light mode based on user (OS) preference
         scheme: preference
@@ -22,7 +22,7 @@ theme:
         accent: deep-purple
     icon:
         logo: fontawesome/solid/code
-    favicon: '/assets/images/favicon.ico'
+    favicon: '/docs_assets/images/favicon.ico'
     language: 'en'
 
 
@@ -87,7 +87,7 @@ use_directory_urls: false
 
 # Better PDF styling for when you create PDFs using mkdocs-pdf-export-plugin
 extra_css:
-  - assets/stylesheets/pdf-export.css
+  - docs_assets/stylesheets/pdf-export.css
 
 # Setup mathjax, see
 # https://squidfunk.github.io/mkdocs-material/reference/mathjax/
