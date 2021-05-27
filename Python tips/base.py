@@ -3,9 +3,6 @@
 import argparse
 import html
 import logging
-from typing import List
-
-import pandas as pd
 
 
 def parse_arguments():
@@ -23,21 +20,6 @@ def parse_arguments():
     verbose = {0: logging.CRITICAL, 1: logging.ERROR, 2: logging.WARNING, 3: logging.INFO, 4: logging.DEBUG}
     logging.basicConfig(format="%(message)s", level=verbose[args.v], filename="output/errors.log")
     return args
-
-
-def print_df(df: pd.DataFrame, rows: int, exit_script: bool = False):
-    """Prints a DataFrame.
-
-    Args:
-        df (pd.DataFrame): tabular view to print.
-        rows (int): the number of rows to print.
-        exit_script (bool): whether to exit the script.
-
-    """
-    with pd.option_context("display.max_rows", None, "display.max_columns", None):
-        print(df.head(rows))
-        if exit_script:
-            exit()
 
 
 def unescape_html(text: str) -> str:
@@ -69,29 +51,3 @@ def unescape_html(text: str) -> str:
 
     """
     return html.unescape(text)
-
-
-def equal_array_items(x: List) -> bool:
-    """Compares whether all array items are of the same type and content.
-
-    Args:
-        x (List): array to compare list items in.
-
-    Examples:
-
-        >>> equal_array_items([{'end': 20, 'labels': ['NORP'], 'start': 13, 'text': 'english'}
-        >>> , {'end': 20, 'labels': ['NORP'], 'start': 13, 'text': 'english'}])
-        True
-        >>> equal_array_items([{'end': 20, 'labels': ['NORP'], 'start': 13, 'text': 'english'}
-        >>> , {'end': 20, 'labels': ['LOCATION'], 'start': 13, 'text': 'english'}])
-        False
-
-    Returns:
-
-        bool: True if all items in this list are equal, False otherwise.
-
-    """
-    if len(x) == 2:
-        return x[0] == x[1]
-    else:
-        return x[0] == x[1] and equal_array_items(x[1:])
