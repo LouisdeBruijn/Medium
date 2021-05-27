@@ -88,8 +88,8 @@ Compares whether all array items are of the same type and content.
 
 **Examples**
 
-* 20, 'labels': ['NORP'], 'start': 13, 'text': 'english'}         , {'end': 20, 'labels': ['NORP'], 'start': 13, 'text': 'english'}])
-* 20, 'labels': ['NORP'], 'start': 13, 'text': 'english'}         , {'end': 20, 'labels': ['LOCATION'], 'start': 13, 'text': 'english'}])
+* 20, 'l': ['NORP'], 't': 'nl'}, {'e': 20, 'l': ['NORP'], 't': 'nl'}])
+* 20, 'l': ['LOC'], 't': 'nl'}, {'e': 20, 'l': ['NORP'], 't': 'nl'}])
 
 True
 False
