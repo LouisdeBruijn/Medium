@@ -7,8 +7,8 @@ repos:
   - repo: local
     hooks:
     - id: autoflake
-      name: Remove unused import statements
-      entry: bash -c 'autoflake "$@"; git add -u'
+      name: Remove unused variables and imports
+      entry: autoflake
       language: python
       args: ['--in-place', '--remove-all-unused-imports', '--remove-unused-variable']
       files: \.py$
