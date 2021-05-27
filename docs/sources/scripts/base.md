@@ -78,26 +78,30 @@ Example of HTML entities found during annotations::
 ```
 
 ---
-Compares whether all array items are of the same type and content.
+Converts any HTML entities found in text to their textual representation.
 
 
 **Args**
 
-* **x** (List) : an array to compare list items in.
+* **text** (str) : utterance that may contain HTML entities.
 
 
 **Examples**
 
-* 20, 'l': ['NORP'], 't': 'nl'}, {'e': 20, 'l': ['NORP'], 't': 'nl'}])
-* 20, 'l': ['LOC'], 't': 'nl'}, {'e': 20, 'l': ['NORP'], 't': 'nl'}])
 
-Example of difference in dictionary key-value pairs::
+Example of HTML entities found during annotations::
 
+
+```python
+
+>>> equal_array_items(["1", "1"])
 True
+>>> equal_array_items(["1", "2"])
 False
 
+```
 
 **Returns**
 
-* **bool**  : True if all items in this list are equal, False otherwise.
+* **str**  : utterance without HTML entities.
 
