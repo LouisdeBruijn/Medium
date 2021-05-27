@@ -36,4 +36,9 @@ repos:
       entry: bash -c "gendocs --config 'Python tips/mkgendocs.yml'"
       language: system
       types: [python]
+    - id: mkserve
+      name: Serve the markdown documentation at
+      entry: bash -c 'mkdocs serve'
+      language: system
+      types: [python]
 
