@@ -33,12 +33,12 @@ repos:
       args: ["--max-line-length=120", "--ignore=D100,D104,E402,W503"]
     - id: mkgendocs
       name: Generate markdown from docstrings
-      entry: bash -c "gendocs --config 'Python tips/mkgendocs.yml'"
+      entry: bash -c "gendocs --config 'mkgendocs.yml'"
       language: system
       types: [python]
     - id: mkserve
-      name: Serve the markdown documentation at
-      entry: bash -c 'mkdocs serve'
+      name: Serve the markdown documentation at http://127.0.0.1:8000/
+      entry: bash -c 'mkdocs build'
       language: system
       types: [python]
 

@@ -1,0 +1,17 @@
+sources_dir: docs/sources
+templates_dir: docs/templates
+repo: https://github.com/LouisdeBruijn/Medium.git
+version: master
+
+pages:
+  - page: "scripts/base.md"
+    source: "Python tips/base.py"
+    functions:
+      - print_df
+      - unescape_html
+      - equal_array_items
+
+#  # creates an index page
+#  - page: "scripts/index.md"
+#    source: "base.py"
+#    index: true

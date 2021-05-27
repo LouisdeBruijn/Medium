@@ -1,6 +1,6 @@
 site_name: Everything Python
 repo_name: 'Github Repository'
-repo_url: 'https://github.com/LouisdeBruijn/Medium.git/tree/master/Python%20tips'
+repo_url: 'https://github.com/LouisdeBruijn/Medium.git'
 copyright: '<text class="md-footer-copyright">Made by</p> <a href="https://louisdebruijn.me/">Louis de Bruijn</a>'
 
 extra:
