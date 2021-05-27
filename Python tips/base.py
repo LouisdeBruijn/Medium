@@ -71,10 +71,10 @@ def unescape_html(text: str) -> str:
 
 
 def equal_array_items(x: List) -> bool:
-    """Converts any HTML entities found in text to their textual representation.
+    """Compares whether all array items are of the same type and content.
 
     Args:
-        text (str): utterance that may contain HTML entities.
+        x (List): an array to compare list items in.
 
     Examples:
 
@@ -88,28 +88,10 @@ def equal_array_items(x: List) -> bool:
         False
 
     Returns:
-        str: utterance without HTML entities.
+        bool: True if all items in this list are equal, False otherwise.
 
     """
     if len(x) == 2:
         return x[0] == x[1]
     else:
         return x[0] == x[1] and equal_array_items(x[1:])
-
-
-"""Compares whether all array items are of the same type and content.
-
-Args:
-    x (List): an array to compare list items in.
-
-Examples::
-    >>> equal_array_items([{'e': 20, 'l': ['NORP'], 't': 'nl'}, {'e': 20, 'l': ['NORP'], 't': 'nl'}])
-    True
-    >>> equal_array_items([{'e': 20, 'l': ['LOC'], 't': 'nl'}, {'e': 20, 'l': ['NORP'], 't': 'nl'}])
-    False
-
-Returns:
-
-    bool: True if all items in this list are equal, False otherwise.
-
-"""

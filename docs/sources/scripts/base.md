@@ -78,12 +78,12 @@ Example of HTML entities found during annotations::
 ```
 
 ---
-Converts any HTML entities found in text to their textual representation.
+Compares whether all array items are of the same type and content.
 
 
 **Args**
 
-* **text** (str) : utterance that may contain HTML entities.
+* **x** (List) : an array to compare list items in.
 
 
 **Examples**
@@ -103,5 +103,5 @@ False
 
 **Returns**
 
-* **str**  : utterance without HTML entities.
+* **bool**  : True if all items in this list are equal, False otherwise.
 
