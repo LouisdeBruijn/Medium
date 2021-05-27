@@ -25,8 +25,15 @@ def parse_arguments():
     return args
 
 
-def print_df(df, rows, exit_script=False):
-    """Prints Pandas DataFrame."""
+def print_df(df: pd.DataFrame, rows: int, exit_script: bool = False):
+    """Prints a DataFrame.
+
+    Args:
+        df (pd.DataFrame): tabular view to print.
+        rows (int): the number of rows to print.
+        exit_script (bool): whether to exit the script.
+
+    """
     with pd.option_context("display.max_rows", None, "display.max_columns", None):
         print(df.head(rows))
         if exit_script:
@@ -35,36 +42,54 @@ def print_df(df, rows, exit_script=False):
 
 def unescape_html(text: str) -> str:
     """Converts any HTML entities found in text to their textual representation.
-    :param text: utterance that may contain HTML entities
-    :type text: str
-    Example of HTML entities found during annotations
-        html_entities = [("&nbsp;", " ")
-            , ("&amp;", "&")
-            , ("&gt;", ">")
-            , ("&lt;", "<")
-            , ("&le;", "≤")
-            , ("&ge;", "≥")]
-    :return: utterance wihtout HTML entities
-    :rtype: str
+
+    Args:
+        text (str): utterance that may contain HTML entities.
+
+    Examples:
+
+        Example of HTML entities found during annotations::
+
+        >>> unescape_html("&nbsp;")
+        ""
+        >>> unescape_html("&amp;")
+        "&"
+        >>> unescape_html("&gt;")
+        ">"
+        >>> unescape_html("&lt;")
+        "<"
+        >>> unescape_html("&le;")
+        "≤"
+        >>> unescape_html("&ge;")
+        "≥"
+
+
+    Returns:
+        str: utterance without HTML entities.
+
     """
     return html.unescape(text)
 
 
 def equal_array_items(x: List) -> bool:
     """Compares whether all array items are of the same type and content.
-    Example:
-        lst = [{'end': 20, 'labels': ['NORP'], 'start': 13, 'text': 'english'}
-        , {'end': 20, 'labels': ['NORP'], 'start': 13, 'text': 'english'}]
-        equal_array_items(lst)
-        >>> True
-        lst = [{'end': 20, 'labels': ['NORP'], 'start': 13, 'text': 'english'}
-        , {'end': 20, 'labels': ['LOCATION'], 'start': 13, 'text': 'english'}]
-        equal_array_items(lst)
-        >>> False
-    :param x: array to compare list items in
-    :type x: list
-    :return: whether all items in this list are equal
-    :rtype: bool
+
+    Args:
+        x (List): array to compare list items in.
+
+    Examples:
+
+        >>> equal_array_items([{'end': 20, 'labels': ['NORP'], 'start': 13, 'text': 'english'}
+        >>> , {'end': 20, 'labels': ['NORP'], 'start': 13, 'text': 'english'}])
+        True
+        >>> equal_array_items([{'end': 20, 'labels': ['NORP'], 'start': 13, 'text': 'english'}
+        >>> , {'end': 20, 'labels': ['LOCATION'], 'start': 13, 'text': 'english'}])
+        False
+
+    Returns:
+
+        bool: True if all items in this list are equal, False otherwise.
+
     """
     if len(x) == 2:
         return x[0] == x[1]
