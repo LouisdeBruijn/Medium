@@ -125,6 +125,118 @@ pages:
     source: "Python tips/automate.py"
     functions:
       - automate_mkdocs_from_docstring
+      - fake_func
+  - page: "scripts/Python tips/format.md"
+    source: "Python tips/format.py"
+    functions:
+      - parse_arguments
+      - modular_function
+  - page: "scripts/Python tips/tips.md"
+    source: "Python tips/tips.py"
+    functions:
+      - return_stuff
+  - page: "scripts/Python tips/base.md"
+    source: "Python tips/base.py"
+    functions:
+      - parse_arguments
+      - print_df
+      - unescape_html
+      - equal_array_items
+  - page: "scripts/PDF retrieval/pdf_retrieval.md"
+    source: "PDF retrieval/pdf_retrieval.py"
+    functions:
+      - fonts
+      - font_tags
+      - headers_para
+  - page: "scripts/Scrape Watchexchange/compare.md"
+    source: "Scrape Watchexchange/compare.py"
+    functions:
+      - get_currencies
+      - get_wiki_watch_brands
+      - get_chrono24_watch_brands
+      - get_ablogtowatch_watch_brands
+      - get_chrono24_models
+      - get_date
+      - watchbase_dataset
+      - scrape_watch_models
+  - page: "scripts/Scrape Watchexchange/build_spacy.md"
+    source: "Scrape Watchexchange/build_spacy.py"
+    functions:
+      - get_proxies
+      - random_user_agent
+      - parse_url
+      - get_pages
+      - chrono24_result_page
+      - scrape_chrono24
+  - page: "scripts/Django elements/decorators.md"
+    source: "Django elements/decorators.py"
+    functions:
+      - user_passes_test
+      - check_recaptcha
+      - superuser_required
+      - staff_required
+      - unauthenticated_required
+  - page: "scripts/charts/demographics.md"
+    source: "charts/demographics.py"
+    functions:
+      - demographics
+  - page: "scripts/charts/data_preparation.md"
+    source: "charts/data_preparation.py"
+    functions:
+      - hashtag_demographics
+      - creation_date_demographics
+      - text_demographics
+      - user_demographics
+  - page: "scripts/NLP pipeline/pipeline.md"
+    source: "NLP pipeline/pipeline.py"
+    functions:
+      - parse_arguments
+      - read_corpus
+      - shuffle_split
+      - prior_probabilities
+      - baseline_classifier
+      - tokenize_pos
+      - feature_union
+      - tabular_results
+      - class_report
+      - vis
+  - page: "scripts/JSON/json_functions.md"
+    source: "JSON/json_functions.py"
+    functions:
+      - is_json
+      - print_json
+      - prettify_json_file
+      - write_jsonl
+      - unescape_html
+      - unescape_html_wrapper
+  - page: "scripts/JSON/serialise_file.md"
+    source: "JSON/serialise_file.py"
+    functions:
+      - timestamp_file
+      - json_to_file
+  - page: "scripts/MovieLens recommender/alsrecommender.md"
+    source: "MovieLens recommender/alsrecommender.py"
+    functions:
+      - load_data
+      - sparse_matrices
+      - model
+      - most_similar_items
+      - most_similar_users
+      - recommend
+      - recommend_all_users
+      - map_movies
+      - map_users
+      - visualise_movies
+      - recalculate_user
+  - page: "scripts/IAA/iaa.md"
+    source: "IAA/iaa.py"
+    functions:
+      - cohen_kappa_function
+      - fleiss_kappa_function
+  - page: "scripts/Python tips/automate.md"
+    source: "Python tips/automate.py"
+    functions:
+      - automate_mkdocs_from_docstring
   - page: "scripts/Python tips/format.md"
     source: "Python tips/format.py"
     functions:
