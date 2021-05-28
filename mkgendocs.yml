@@ -4,23 +4,5 @@ repo: https://github.com/LouisdeBruijn/Medium
 version: master
 
 pages:
-  - page: "scripts/Python tips/automate.md"
-    source: "Python tips/automate.py"
-    functions:
-      - automate_mkdocs_from_docstring
-  - page: "scripts/Python tips/format.md"
-    source: "Python tips/format.py"
-    functions:
-      - parse_arguments
-      - modular_function
-  - page: "scripts/Python tips/tips.md"
-    source: "Python tips/tips.py"
-    functions:
-      - return_stuff
-  - page: "scripts/Python tips/base.md"
-    source: "Python tips/base.py"
-    functions:
-      - parse_arguments
-      - print_df
-      - unescape_html
-      - equal_array_items
+  - page: "scripts/IAA/iaa.md"
+    source: "IAA/iaa.py"
