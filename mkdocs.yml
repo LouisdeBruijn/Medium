@@ -1,7 +1,7 @@
 site_name: Everything Python
 repo_name: 'Github Repository'
 repo_url: 'https://github.com/LouisdeBruijn/Medium'
-copyright: '<text class="md-footer-copyright">Made by</p> <a href="https://louisdebruijn.me/">Louis de Bruijn</a>'
+copyright: 'Made by <a href="https://louisdebruijn.me/">Louis de Bruijn</a>'
 
 extra:
     social:
