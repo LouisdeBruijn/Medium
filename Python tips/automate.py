@@ -73,6 +73,10 @@ def automate_mkdocs_from_docstring(
         return f"Added to {mkgendocs_f}: {tuple(functions.values())}."
 
 
+def fake_func(a):
+    print(a)
+
+
 def main():
 
     python_tips_dir = (
