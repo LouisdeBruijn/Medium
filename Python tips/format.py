@@ -43,7 +43,7 @@ def modular_sphinx_function():
 
 
 def modular_google_function(arg1: int):
-    """
+    """< Summary. >
 
     Args:
         arg1 (<variable_type): <description>
