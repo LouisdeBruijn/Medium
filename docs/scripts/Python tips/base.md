@@ -1,6 +1,18 @@
 #
 
 
+### parse_arguments
+[source](https://github.com/LouisdeBruijn/Medium/blob/master/Python tips/base.py/#L11)
+```python
+.parse_arguments()
+```
+
+---
+Read arguments from a command line.
+
+----
+
+
 ### print_df
 [source](https://github.com/LouisdeBruijn/Medium/blob/master/Python tips/base.py/#L28)
 ```python
@@ -43,11 +55,11 @@ Converts any HTML entities found in text to their textual representation.
 **Examples**
 
 
-Example of HTML entities found during annotations::
-
 
 ```python
 
+>>> unescape_html("&nbsp;")
+""
 >>> unescape_html("&amp;")
 "&"
 >>> unescape_html("&gt;")
@@ -70,7 +82,7 @@ Example of HTML entities found during annotations::
 
 
 ### equal_array_items
-[source](https://github.com/LouisdeBruijn/Medium/blob/master/Python tips/base.py/#L73)
+[source](https://github.com/LouisdeBruijn/Medium/blob/master/Python tips/base.py/#L72)
 ```python
 .equal_array_items(
    x: List
@@ -88,8 +100,6 @@ Compares whether all array items are of the same type and content.
 
 **Examples**
 
-
-Examples of equal and unequal array items::
 
 
 ```python

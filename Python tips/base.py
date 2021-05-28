@@ -48,8 +48,7 @@ def unescape_html(text: str) -> str:
 
     Examples:
 
-        Example of HTML entities found during annotations::
-
+        >>>
         >>> unescape_html("&nbsp;")
         ""
         >>> unescape_html("&amp;")
@@ -78,10 +77,7 @@ def equal_array_items(x: List) -> bool:
 
     Examples:
 
-        Examples of equal and unequal array items::
-
-        >>> equal_array_items(["1", "1"])
-        True
+        >>>
         >>> equal_array_items(["1", "1"])
         True
         >>> equal_array_items(["1", "2"])
