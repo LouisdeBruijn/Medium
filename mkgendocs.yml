@@ -28,6 +28,7 @@ pages:
       - parse_arguments
       - print_df
       - unescape_html
+      - fake_func
       - equal_array_items
   - page: "scripts/PDF retrieval/pdf_retrieval.md"
     source: "PDF retrieval/pdf_retrieval.py"

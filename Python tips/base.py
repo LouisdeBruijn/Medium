@@ -69,6 +69,10 @@ def unescape_html(text: str) -> str:
     return html.unescape(text)
 
 
+def fake_func(a):
+    print(a)
+
+
 def equal_array_items(x: List) -> bool:
     """Compares whether all array items are of the same type and content.
 

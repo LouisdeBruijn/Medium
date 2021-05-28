@@ -81,8 +81,20 @@ Converts any HTML entities found in text to their textual representation.
 ----
 
 
-### equal_array_items
+### fake_func
 [source](https://github.com/LouisdeBruijn/Medium/blob/master/Python tips/base.py/#L72)
+```python
+.fake_func(
+   a
+)
+```
+
+
+----
+
+
+### equal_array_items
+[source](https://github.com/LouisdeBruijn/Medium/blob/master/Python tips/base.py/#L76)
 ```python
 .equal_array_items(
    x: List
