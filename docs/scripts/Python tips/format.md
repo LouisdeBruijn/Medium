@@ -53,9 +53,13 @@ Read arguments from a command line.
 **Examples**
 
 
+
+```python
+
 >>> modular_google_function(1)
 2
 
+```
 
 **Returns**
 

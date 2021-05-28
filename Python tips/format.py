@@ -50,6 +50,7 @@ def modular_google_function(arg1: int):
 
     Examples:
 
+        >>>
         >>> modular_google_function(1)
         2
 
