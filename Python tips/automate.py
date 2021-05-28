@@ -39,7 +39,7 @@ def automate_mkdocs_from_docstring(
                     function = re.split("def |\\(", line)[1]
                     functions[script].append(function)
 
-    with open(f"{repo_dir.parent}/{mkgendocs_f}", "r+") as mkgen_config:
+    with open(f"{repo_dir}/{mkgendocs_f}", "r+") as mkgen_config:
         insert_string = ""
         for path, function_names in functions.items():
             insert_string += (
