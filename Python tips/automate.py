@@ -58,15 +58,20 @@ def automate_mkdocs_from_docstring(
         if match_string in contents[-1]:
             contents.append(insert_string)
         else:
+
             for index, line in enumerate(contents):
+                print(index)
                 if match_string in line and insert_string not in contents[index + 1]:
                     contents.insert(index + 1, insert_string)
 
                     if cut_file:
-                        contents = contents[: index + 1]
+                        n_lines = len(insert_string.splitlines())
+                        contents = contents[: index + 1 + n_lines]
+                    print(len(contents))
 
                     break
 
+        print(contents)
         mkgen_config.seek(0)
         mkgen_config.writelines(contents)
 
