@@ -17,7 +17,8 @@ pages:
     source: "Python tips/format.py"
     functions:
       - parse_arguments
-      - modular_function
+      - modular_sphinx_function
+      - modular_google_function
   - page: "scripts/Python tips/tips.md"
     source: "Python tips/tips.py"
     functions:
@@ -28,7 +29,6 @@ pages:
       - parse_arguments
       - print_df
       - unescape_html
-      - fake_func
       - equal_array_items
   - page: "scripts/PDF retrieval/pdf_retrieval.md"
     source: "PDF retrieval/pdf_retrieval.py"

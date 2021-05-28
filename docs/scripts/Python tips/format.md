@@ -13,10 +13,10 @@ Read arguments from a command line.
 ----
 
 
-### modular_function
-[source](https://github.com/LouisdeBruijn/Medium/blob/master/Python tips/format.py/#L26)
+### modular_sphinx_function
+[source](https://github.com/LouisdeBruijn/Medium/blob/master/Python tips/format.py/#L31)
 ```python
-.modular_function()
+.modular_sphinx_function()
 ```
 
 ---
@@ -29,3 +29,32 @@ Read arguments from a command line.
 <other exceptions>
 :rtype: <return_type>
 :return: <return_description>
+
+----
+
+
+### modular_google_function
+[source](https://github.com/LouisdeBruijn/Medium/blob/master/Python tips/format.py/#L45)
+```python
+.modular_google_function(
+   arg1: int
+)
+```
+
+
+**Args**
+
+* **arg1** (<variable_type) : <description>
+
+
+**Examples**
+
+
+>>> modular_google_function(1)
+2
+
+
+**Returns**
+
+
+The sum of the first argument

@@ -4,26 +4,31 @@
 # Author: Louis de Bruijn
 # Date: 19-05-2020
 
-import sys
 import argparse
 import logging
-from logging import critical, error, info, warning, debug
+import sys
+from logging import error, info
 
 
 def parse_arguments():
     """Read arguments from a command line."""
-    parser = argparse.ArgumentParser(description='Arguments get parsed via --commands')
-    parser.add_argument('-v', metavar='verbosity', type=int, default=2,
-        help='Verbosity of logging: 0 -critical, 1- error, 2 -warning, 3 -info, 4 -debug')
+    parser = argparse.ArgumentParser(description="Arguments get parsed via --commands")
+    parser.add_argument(
+        "-v",
+        metavar="verbosity",
+        type=int,
+        default=2,
+        help="Verbosity of logging: 0 -critical, 1- error, 2 -warning, 3 -info, 4 -debug",
+    )
 
     args = parser.parse_args()
     verbose = {0: logging.CRITICAL, 1: logging.ERROR, 2: logging.WARNING, 3: logging.INFO, 4: logging.DEBUG}
-    logging.basicConfig(format='%(message)s', level=verbose[args.v], stream=sys.stdout)
+    logging.basicConfig(format="%(message)s", level=verbose[args.v], stream=sys.stdout)
 
     return args
 
 
-def modular_function():
+def modular_sphinx_function():
     """< Summary. >
 
     :param <variable_name>: <variable_description>, defaults to <default_value>
@@ -37,18 +42,39 @@ def modular_function():
     return "This modular function with examplary Sphinx docstring conventions."
 
 
+def modular_google_function(arg1: int):
+    """
+
+    Args:
+        arg1 (<variable_type): <description>
+
+    Examples:
+
+        >>> modular_google_function(1)
+        2
+
+    Returns:
+
+        The sum of the first argument
+
+    """
+    return arg1 + arg1
+
+
 def main():
 
     info("Running the main program.")
 
-    print(modular_function)
+    print(modular_sphinx_function)
+
+    print(modular_google_function(1))
 
     try:
-        'string' + 10
+        "string" + 10
     except Exception as e:
         error(str(e))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     args = parse_arguments()
     main()
