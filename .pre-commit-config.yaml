@@ -35,15 +35,12 @@ repos:
       name: Add functions to mkgendocs configurations YAML
       entry: bash -c "python3 Python\ tips/automate.py; git add -u" --
       language: system
-      types: [python]
     - id: mkgendocs
       name: Generate markdown from docstrings
       entry: bash -c "gendocs --config 'mkgendocs.yml'; git add -u" --
       language: system
-      types: [python]
     - id: mkbuild
       name: Build the markdown documentation, run with '$ mkdocs serve' at http://127.0.0.1:8000/
       entry: bash -c 'mkdocs build'
       language: system
-      types: [python]
 
