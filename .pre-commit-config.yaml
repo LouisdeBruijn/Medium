@@ -33,7 +33,7 @@ repos:
       args: ["--max-line-length=120", "--ignore=D100,D104,E402,W503"]
     - id: automate_functions
       name: Add functions to mkgendocs configurations YAML
-      entry: bash -c "python3 Python\ tips/automate.py; git add -u"
+      entry: bash -c "python3 Python\ tips/automate.py"
       language: system
       types: [python]
     - id: mkgendocs
