@@ -84,14 +84,13 @@ def main():
         Path.cwd()
     )  # use `Path.cwd().parent` for all Python files in the repository and not just the 'Python Tips' folder
 
-    msg = automate_mkdocs_from_docstring(
+    automate_mkdocs_from_docstring(
         mkdocs_dir="scripts",
         mkgendocs_f="mkgendocs.yml",
         repo_dir=python_tips_dir,
         cut_file=True,
         match_string="pages:\n",
     )
-    print(msg)
 
 
 if __name__ == "__main__":
