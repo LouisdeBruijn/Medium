@@ -70,6 +70,8 @@ def automate_mkdocs_from_docstring(
         mkgen_config.seek(0)
         mkgen_config.writelines(contents)
 
+        print(functions.values())
+
         return f"Added to {mkgendocs_f}: {tuple(functions.values())}."
 
 
