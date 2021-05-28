@@ -37,15 +37,3 @@ Automates the -pages for mkgendocs package by adding all functions in a director
 
 * **str**  : feedback message
 
-
-----
-
-
-### fake_func
-[source](https://github.com/LouisdeBruijn/Medium/blob/master/Python tips/automate.py/#L81)
-```python
-.fake_func(
-   a
-)
-```
-

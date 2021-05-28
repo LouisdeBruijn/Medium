@@ -13,7 +13,6 @@ pages:
     source: "Python tips/automate.py"
     functions:
       - automate_mkdocs_from_docstring
-      - fake_func
   - page: "scripts/Python tips/format.md"
     source: "Python tips/format.py"
     functions:
@@ -225,6 +224,7 @@ pages:
       - recommend
       - recommend_all_users
       - map_movies
+      - map_users
       - map_users
       - visualise_movies
       - recalculate_user
