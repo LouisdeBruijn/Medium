@@ -4,7 +4,7 @@ from typing import Union
 
 
 def automate_mkdocs_from_docstring(
-    mkdocs_dir: Union[str, Path], mkgendocs_f: str, repo_dir: Union[str, Path], cut_file: bool, match_string: str
+    mkdocs_dir: Union[str, Path], mkgendocs_f: str, repo_dir: Union[str, Path], match_string: str
 ):
     """Automates the -pages for mkgendocs package by adding all functions in a directory.
 
@@ -12,13 +12,12 @@ def automate_mkdocs_from_docstring(
         mkdocs_dir (str): textual directory for the hierarchical directory & navigation in Mkdocs
         mkgendocs_f (str): The configurations file for the mkgendocs package
         repo_dir (str): textual directory to search for Python functions in
-        cut_file (bool): whether to remove remaining lines in file after the match_string line
         match_string (str): the text to be matches, after which the functions will be added in mkgendocs format
 
     Example:
 
         >>>
-        >>> automate_mkdocs_from_docstring('scripts', cut_file=True, repo_dir=Path.cwd(), match_string='pages:')
+        >>> automate_mkdocs_from_docstring('scripts', repo_dir=Path.cwd(), match_string='pages:')
 
     Returns:
         str: feedback message
@@ -60,22 +59,16 @@ def automate_mkdocs_from_docstring(
         else:
 
             for index, line in enumerate(contents):
-                print(index)
                 if match_string in line and insert_string not in contents[index + 1]:
-                    contents.insert(index + 1, insert_string)
 
-                    if cut_file:
-                        n_lines = len(insert_string.splitlines())
-                        contents = contents[: index + 1 + n_lines]
-                    print(len(contents))
-
+                    contents = contents[: index + 1]
+                    contents.append(insert_string)
                     break
 
-        print(contents)
-        mkgen_config.seek(0)
+    with open(f"{repo_dir}/{mkgendocs_f}", "w") as mkgen_config:
         mkgen_config.writelines(contents)
 
-        return f"Added to {mkgendocs_f}: {tuple(functions.values())}."
+    return f"Added to {mkgendocs_f}: {tuple(functions.values())}."
 
 
 def main():
@@ -88,7 +81,6 @@ def main():
         mkdocs_dir="scripts",
         mkgendocs_f="mkgendocs.yml",
         repo_dir=python_tips_dir,
-        cut_file=True,
         match_string="pages:\n",
     )
 
