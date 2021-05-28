@@ -4,5 +4,3 @@ repo: https://github.com/LouisdeBruijn/Medium
 version: master
 
 pages:
-  - page: "scripts/IAA/iaa.md"
-    source: "IAA/iaa.py"
