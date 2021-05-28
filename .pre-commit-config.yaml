@@ -31,12 +31,17 @@ repos:
       language: system
       types: [python]
       args: ["--max-line-length=120", "--ignore=D100,D104,E402,W503"]
+    - id: automate_functions
+      name: Add functions to mkgendocs configurations YAML
+      entry: bash -c "python3 Python\ tips/automate.py; git add -u"
+      language: system
+      types: [python]
     - id: mkgendocs
       name: Generate markdown from docstrings
       entry: bash -c "gendocs --config 'mkgendocs.yml'; git add -u"
       language: system
       types: [python]
-    - id: mkserve
+    - id: mkbuild
       name: Build the markdown documentation, run with '$ mkdocs serve' at http://127.0.0.1:8000/
       entry: bash -c 'mkdocs build'
       language: system
