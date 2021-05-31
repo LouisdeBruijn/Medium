@@ -43,4 +43,10 @@ repos:
       name: Build the markdown documentation, run with '$ mkdocs serve' at http://127.0.0.1:8000/
       entry: bash -c 'mkdocs build'
       language: system
-
+    - id: tests
+      name: run tests
+      entry: pytest tests -v
+      language: python
+      always_run: true
+      pass_filenames: false
+      stages: [push]  # Makes sure that tests are only run when pushing the code
