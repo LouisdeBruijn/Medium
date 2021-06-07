@@ -2,7 +2,7 @@
 
 
 ### cohen_kappa_function
-[source](https://github.com/LouisdeBruijn/Medium/blob/master/IAA/iaa.py/#L14)
+[source](https://github.com/LouisdeBruijn/Medium/blob/master/IAA/iaa.py/#L15)
 ```python
 .cohen_kappa_function(
    ann1, ann2
@@ -24,7 +24,7 @@ Computes Cohen kappa for pair-wise annotators.
 
 
 ### fleiss_kappa_function
-[source](https://github.com/LouisdeBruijn/Medium/blob/master/IAA/iaa.py/#L42)
+[source](https://github.com/LouisdeBruijn/Medium/blob/master/IAA/iaa.py/#L43)
 ```python
 .fleiss_kappa_function(
    M

@@ -42,7 +42,7 @@ def modular_sphinx_function():
     return "This modular function with examplary Sphinx docstring conventions."
 
 
-def modular_google_function(arg1: int):
+def modular_google_function(arg1: int) -> int:
     """< Summary. >
 
     Args:

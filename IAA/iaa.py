@@ -5,6 +5,7 @@
 # Date: 14-07-2020
 
 import json
+
 import numpy as np
 import pandas as pd
 from sklearn.metrics import cohen_kappa_score
@@ -33,7 +34,7 @@ def cohen_kappa_function(ann1, ann2):
     for item in uniq:
         cnt1 = ann1.count(item)
         cnt2 = ann2.count(item)
-        count = ((cnt1 / len(ann1)) * (cnt2 / len(ann2)))
+        count = (cnt1 / len(ann1)) * (cnt2 / len(ann2))
         E += count
 
     return round((A - E) / (1 - E), 4)
@@ -91,5 +92,5 @@ def main():
     print("Fleiss Kappa score for group 1: {0}.".format(fleiss_statsmodels))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
