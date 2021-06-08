@@ -78,9 +78,8 @@ Automate docstring argument variable-type from type-hints.
 
 **Args**
 
-
-repo_dir (pathlib.Path):
-overwrite_script (bool):
+* **repo_dir** (pathlib.Path) : textual directory to search for Python functions in
+* **overwrite_script** (bool) : enables automatic overwriting of Python scripts in repo_dir
 
 
 **Returns**
