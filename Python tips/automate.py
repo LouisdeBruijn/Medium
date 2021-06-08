@@ -240,7 +240,7 @@ def docstring_from_type_hints(repo_dir: Path, overwrite_script: bool = False) ->
                 script_file.writelines(script_lines)
 
             print(f"Automated docstring generation from type hints: {script}")
-            exit()
+            break
 
     return "Docstring generation from type-hints complete!"
 
