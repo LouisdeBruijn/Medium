@@ -93,6 +93,7 @@ def docstring_from_type_hints(repo_dir: Path, overwrite_script: bool = False) ->
     """Automate docstring argument variable-type from type-hints.
 
     Args:
+
         repo_dir (<class 'pathlib.Path'>):
         overwrite_script (<class 'bool'>):
 

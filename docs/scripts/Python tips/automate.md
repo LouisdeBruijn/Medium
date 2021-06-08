@@ -78,6 +78,7 @@ Automate docstring argument variable-type from type-hints.
 
 **Args**
 
+
 repo_dir (<class 'pathlib.Path'>):
 overwrite_script (<class 'bool'>):
 
