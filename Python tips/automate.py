@@ -1,3 +1,5 @@
+"""Automates Python scripts formatting, linting and Mkdocs documentation."""
+
 import re
 from collections import defaultdict
 from pathlib import Path
@@ -10,19 +12,17 @@ def automate_mkdocs_from_docstring(
     """Automates the -pages for mkgendocs package by adding all Python functions in a directory to the mkgendocs config.
 
     Args:
-        mkdocs_dir (str): textual directory for the hierarchical directory & navigation in Mkdocs
-        mkgendocs_f (str): The configurations file for the mkgendocs package
-        repo_dir (Path): textual directory to search for Python functions in
-        match_string (str): the text to be matches, after which the functions will be added in mkgendocs format
+        mkdocs_dir (typing.Union[str, pathlib.Path]): textual directory for the hierarchical directory & navigation in Mkdocs
+        mkgendocs_f (<class 'str'>): The configurations file for the mkgendocs package
+        repo_dir (<class 'pathlib.Path'>): textual directory to search for Python functions in
+        match_string (<class 'str'>): the text to be matches, after which the functions will be added in mkgendocs format
 
     Example:
-
         >>>
         >>> automate_mkdocs_from_docstring('scripts', repo_dir=Path.cwd(), match_string='pages:')
 
     Returns:
-
-        str: feedback message
+        <class 'str'>: feedback message
 
     """
     p = repo_dir.glob("**/*.py")
@@ -73,22 +73,29 @@ def automate_mkdocs_from_docstring(
 
 
 def indent(string: str) -> int:
-    """
+    """Count the indentation in whitespace characters.
 
     Args:
-        string (str): str
+        string (<class 'str'>): str
 
     Returns:
-        int: Number of whitespace indentations
+        <class 'int'>: Number of whitespace indentations
 
     """
     return sum(4 if char == "\t" else 1 for char in string[: -len(string.lstrip())])
 
 
-def main():
+def docstring_from_type_hints(repo_dir: Path, overwrite_script: bool = False) -> str:
+    """Automate docstring argument variable-type from type-hints.
 
-    repo_dir = Path("/Users/hd65ox/Repositories/Medium/Python tips")
+    Args:
+        repo_dir (<class 'pathlib.Path'>):
+        overwrite_script (<class 'bool'>):
 
+    Returns:
+        <class 'str'>: feedback message
+
+    """
     p = repo_dir.glob("**/*.py")
     scripts = [x for x in p if x.is_file()]
 
@@ -186,7 +193,9 @@ def main():
                                     return_arg = return_lines[0]
                                     if return_arg.split(":"):
 
-                                        new_return_docstring = re.sub(r"\w(.*:)", f"{str(return_hint)}:", return_arg)
+                                        new_return_docstring = re.sub(r"\S(.*:)", f"{str(return_hint)}:", return_arg)
+
+                                        print(new_return_docstring)
 
                                         idx = script_lines.index(f"{return_arg}\n")
                                         new_arguments[idx] = f"{new_return_docstring}\n"
@@ -210,12 +219,23 @@ def main():
         for (idx, new_arg) in sorted_arguments:
             script_lines[idx] = new_arg
 
-        with open(f"{repo_dir}/test_it.py", "w") as overwrite_script:
-            overwrite_script.writelines(script_lines)
-        exit()
+        if overwrite_script:
+            with open(script, "w") as script_file:
+                script_file.writelines(script_lines)
+
+            print(f"Automated docstring generation from type hints: {script}")
+            exit()
+
+    return "Docstring generation from type-hints complete!"
+
+
+def main():
+    """Execute when running this script."""
+    repo_dir = Path("/Users/hd65ox/Repositories/Medium/Python tips")
+
+    docstring_from_type_hints(repo_dir, overwrite_script=True)
 
     exit()
-
     python_tips_dir = (
         Path.cwd()
     )  # use `Path.cwd().parent` for all Python files in the repository and not just the 'Python Tips' folder

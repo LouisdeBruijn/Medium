@@ -2,7 +2,7 @@
 
 
 ### automate_mkdocs_from_docstring
-[source](https://github.com/LouisdeBruijn/Medium/blob/master/Python tips/automate.py/#L7)
+[source](https://github.com/LouisdeBruijn/Medium/blob/master/Python tips/automate.py/#L9)
 ```python
 .automate_mkdocs_from_docstring(
    mkdocs_dir: Union[str, Path], mkgendocs_f: str, repo_dir: Path,
@@ -16,14 +16,13 @@ Automates the -pages for mkgendocs package by adding all Python functions in a d
 
 **Args**
 
-* **mkdocs_dir** (str) : textual directory for the hierarchical directory & navigation in Mkdocs
-* **mkgendocs_f** (str) : The configurations file for the mkgendocs package
-* **repo_dir** (Path) : textual directory to search for Python functions in
-* **match_string** (str) : the text to be matches, after which the functions will be added in mkgendocs format
+* **mkdocs_dir** (typing.Union[str, pathlib.Path]) : textual directory for the hierarchical directory & navigation in Mkdocs
+* **mkgendocs_f** (<class 'str'>) : The configurations file for the mkgendocs package
+* **repo_dir** (<class 'pathlib.Path'>) : textual directory to search for Python functions in
+* **match_string** (<class 'str'>) : the text to be matches, after which the functions will be added in mkgendocs format
 
 
 **Example**
-
 
 
 ```python
@@ -34,5 +33,5 @@ Automates the -pages for mkgendocs package by adding all Python functions in a d
 
 **Returns**
 
-* **str**  : feedback message
+* feedback message
 
