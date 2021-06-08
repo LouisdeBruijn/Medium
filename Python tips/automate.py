@@ -246,9 +246,7 @@ def docstring_from_type_hints(repo_dir: Path, overwrite_script: bool = False) ->
 
 def main():
     """Execute when running this script."""
-    python_tips_dir = (
-        Path.cwd()
-    )  # use `Path.cwd().parent` for all Python files in the repository and not just the 'Python Tips' folder
+    python_tips_dir = Path.cwd().joinpath("Python tips")
 
     docstring_from_type_hints(python_tips_dir, overwrite_script=True)
 
