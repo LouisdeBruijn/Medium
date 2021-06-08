@@ -141,7 +141,13 @@ def docstring_from_type_hints(repo_dir: Path, overwrite_script: bool = False) ->
                                 arguments = args.group()
                                 argument_lines = arguments.split("\n")
 
-                                exclude = ["Args:", "Example:", "Examples:", "Returns:", '"""']
+                                exclude = [
+                                    "Args:",
+                                    "Example:",
+                                    "Examples:",
+                                    "Returns:",
+                                    '"""',
+                                ]
 
                                 argument_lines = [arg for arg in argument_lines if arg]
                                 argument_lines = [arg for arg in argument_lines if not any(x in arg for x in exclude)]
@@ -153,7 +159,9 @@ def docstring_from_type_hints(repo_dir: Path, overwrite_script: bool = False) ->
                                         if argument.split(":"):
                                             if "(" and ")" in argument.split(":")[0]:
                                                 new_argument_docstring = re.sub(
-                                                    r"\(.*?\)", f"({str(type_hints[arg_name])})", argument
+                                                    r"\(.*?\)",
+                                                    f"({str(type_hints[arg_name])})",
+                                                    argument,
                                                 )
 
                                                 idx = script_lines.index(f"{argument}\n")
@@ -172,7 +180,11 @@ def docstring_from_type_hints(repo_dir: Path, overwrite_script: bool = False) ->
 
                         if return_hint:
 
-                            raw_return = re.search(r'    Return[s]?:(.*?)(    """)', docstring_content, re.DOTALL)
+                            raw_return = re.search(
+                                r'    Return[s]?:(.*?)(    """)',
+                                docstring_content,
+                                re.DOTALL,
+                            )
 
                             if raw_return:
 
@@ -193,7 +205,11 @@ def docstring_from_type_hints(repo_dir: Path, overwrite_script: bool = False) ->
                                     return_arg = return_lines[0]
                                     if return_arg.split(":"):
 
-                                        new_return_docstring = re.sub(r"\S(.*:)", f"{str(return_hint)}:", return_arg)
+                                        new_return_docstring = re.sub(
+                                            r"\S(.*:)",
+                                            f"{str(return_hint)}:",
+                                            return_arg,
+                                        )
 
                                         print(new_return_docstring)
 
