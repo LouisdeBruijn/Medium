@@ -3,6 +3,7 @@ black==21.5b1  # linter
 isort==5.8.0  # sorts import statements
 flake8==3.9.2  # PEP8 conventions
 pep8-naming==0.11.1  # variable naming conventions support for flake8
+flake8-docstrings==1.6.0  # enables flake8 Google-style docstring linting
 autoflake==1.4  # removes unused import statements
 mkdocs==1.1.2  # static site generator for documentation in Markdown
 mkdocs-material==7.1.5  # Material support for MkDocs
