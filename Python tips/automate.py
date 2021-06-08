@@ -14,16 +14,16 @@ def automate_mkdocs_from_docstring(
 
     Args:
         mkdocs_dir (typing.Union[str, pathlib.Path]): textual directory for the hierarchical directory & navigation in Mkdocs
-        mkgendocs_f (<class 'str'>): The configurations file for the mkgendocs package
-        repo_dir (<class 'pathlib.Path'>): textual directory to search for Python functions in
-        match_string (<class 'str'>): the text to be matches, after which the functions will be added in mkgendocs format
+        mkgendocs_f (str): The configurations file for the mkgendocs package
+        repo_dir (pathlib.Path): textual directory to search for Python functions in
+        match_string (str): the text to be matches, after which the functions will be added in mkgendocs format
 
     Example:
         >>>
         >>> automate_mkdocs_from_docstring('scripts', repo_dir=Path.cwd(), match_string='pages:')
 
     Returns:
-        <class 'str'>: feedback message
+        str: feedback message
 
     """
     p = repo_dir.glob("**/*.py")
@@ -80,10 +80,10 @@ def indent(string: str) -> int:
     """Count the indentation in whitespace characters.
 
     Args:
-        string (<class 'str'>): str
+        string (str): str
 
     Returns:
-        <class 'int'>: Number of whitespace indentations
+        int: Number of whitespace indentations
 
     """
     return sum(4 if char == "\t" else 1 for char in string[: -len(string.lstrip())])
@@ -94,11 +94,11 @@ def docstring_from_type_hints(repo_dir: Path, overwrite_script: bool = False) ->
 
     Args:
 
-        repo_dir (<class 'pathlib.Path'>):
-        overwrite_script (<class 'bool'>):
+        repo_dir (pathlib.Path):
+        overwrite_script (bool):
 
     Returns:
-        <class 'str'>: feedback message
+        str: feedback message
 
     """
     p = repo_dir.glob("**/*.py")
@@ -161,9 +161,15 @@ def docstring_from_type_hints(repo_dir: Path, overwrite_script: bool = False) ->
 
                                         if argument.split(":"):
                                             if "(" and ")" in argument.split(":")[0]:
+
+                                                variable_type = str(type_hints[arg_name])
+                                                class_type = re.search(r"(<class ')(.*)('>)", variable_type)
+                                                if class_type:
+                                                    variable_type = class_type.group(2)
+
                                                 new_argument_docstring = re.sub(
                                                     r"\(.*?\)",
-                                                    f"({str(type_hints[arg_name])})",
+                                                    f"({variable_type})",
                                                     argument,
                                                 )
 
@@ -208,9 +214,14 @@ def docstring_from_type_hints(repo_dir: Path, overwrite_script: bool = False) ->
                                     return_arg = return_lines[0]
                                     if return_arg.split(":"):
 
+                                        variable_type = str(return_hint)
+                                        class_type = re.search(r"(<class ')(.*)('>)", variable_type)
+                                        if class_type:
+                                            variable_type = class_type.group(2)
+
                                         new_return_docstring = re.sub(
                                             r"\S(.*:)",
-                                            f"{str(return_hint)}:",
+                                            f"{variable_type}:",
                                             return_arg,
                                         )
 

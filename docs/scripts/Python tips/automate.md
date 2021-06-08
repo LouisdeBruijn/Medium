@@ -17,9 +17,9 @@ Automates the -pages for mkgendocs package by adding all Python functions in a d
 **Args**
 
 * **mkdocs_dir** (typing.Union[str, pathlib.Path]) : textual directory for the hierarchical directory & navigation in Mkdocs
-* **mkgendocs_f** (<class 'str'>) : The configurations file for the mkgendocs package
-* **repo_dir** (<class 'pathlib.Path'>) : textual directory to search for Python functions in
-* **match_string** (<class 'str'>) : the text to be matches, after which the functions will be added in mkgendocs format
+* **mkgendocs_f** (str) : The configurations file for the mkgendocs package
+* **repo_dir** (pathlib.Path) : textual directory to search for Python functions in
+* **match_string** (str) : the text to be matches, after which the functions will be added in mkgendocs format
 
 
 **Example**
@@ -33,7 +33,7 @@ Automates the -pages for mkgendocs package by adding all Python functions in a d
 
 **Returns**
 
-* feedback message
+* **str**  : feedback message
 
 
 ----
@@ -53,12 +53,12 @@ Count the indentation in whitespace characters.
 
 **Args**
 
-* **string** (<class 'str'>) : str
+* **string** (str) : str
 
 
 **Returns**
 
-* Number of whitespace indentations
+* **int**  : Number of whitespace indentations
 
 
 ----
@@ -79,11 +79,11 @@ Automate docstring argument variable-type from type-hints.
 **Args**
 
 
-repo_dir (<class 'pathlib.Path'>):
-overwrite_script (<class 'bool'>):
+repo_dir (pathlib.Path):
+overwrite_script (bool):
 
 
 **Returns**
 
-* feedback message
+* **str**  : feedback message
 
