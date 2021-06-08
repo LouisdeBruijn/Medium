@@ -29,6 +29,9 @@ def automate_mkdocs_from_docstring(
     p = repo_dir.glob("**/*.py")
     scripts = [x for x in p if x.is_file()]
 
+    if Path.cwd() != repo_dir:  # look for mkgendocs.yml in the parent file if a subdirectory is used
+        repo_dir = repo_dir.parent
+
     functions = defaultdict(list)
     for script in scripts:
         with open(script, "r") as file:
@@ -209,8 +212,6 @@ def docstring_from_type_hints(repo_dir: Path, overwrite_script: bool = False) ->
                                             f"{str(return_hint)}:",
                                             return_arg,
                                         )
-
-                                        print(new_return_docstring)
 
                                         idx = script_lines.index(f"{return_arg}\n")
                                         new_arguments[idx] = f"{new_return_docstring}\n"

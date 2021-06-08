@@ -35,3 +35,54 @@ Automates the -pages for mkgendocs package by adding all Python functions in a d
 
 * feedback message
 
+
+----
+
+
+### indent
+[source](https://github.com/LouisdeBruijn/Medium/blob/master/Python tips/automate.py/#L79)
+```python
+.indent(
+   string: str
+)
+```
+
+---
+Count the indentation in whitespace characters.
+
+
+**Args**
+
+* **string** (<class 'str'>) : str
+
+
+**Returns**
+
+* Number of whitespace indentations
+
+
+----
+
+
+### docstring_from_type_hints
+[source](https://github.com/LouisdeBruijn/Medium/blob/master/Python tips/automate.py/#L92)
+```python
+.docstring_from_type_hints(
+   repo_dir: Path, overwrite_script: bool = False
+)
+```
+
+---
+Automate docstring argument variable-type from type-hints.
+
+
+**Args**
+
+repo_dir (<class 'pathlib.Path'>):
+overwrite_script (<class 'bool'>):
+
+
+**Returns**
+
+* feedback message
+
