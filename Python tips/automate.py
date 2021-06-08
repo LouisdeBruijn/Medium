@@ -21,6 +21,7 @@ def automate_mkdocs_from_docstring(
         >>> automate_mkdocs_from_docstring('scripts', repo_dir=Path.cwd(), match_string='pages:')
 
     Returns:
+
         str: feedback message
 
     """
