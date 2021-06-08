@@ -1,5 +1,6 @@
 """Automates Python scripts formatting, linting and Mkdocs documentation."""
 
+import importlib
 import re
 from collections import defaultdict
 from pathlib import Path
@@ -105,8 +106,6 @@ def docstring_from_type_hints(repo_dir: Path, overwrite_script: bool = False) ->
         new_arguments = {}
         with open(script, "r") as file:
             script_lines = file.readlines()
-
-            import importlib
 
             module = importlib.import_module(script.stem)
 

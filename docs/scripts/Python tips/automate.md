@@ -2,7 +2,7 @@
 
 
 ### automate_mkdocs_from_docstring
-[source](https://github.com/LouisdeBruijn/Medium/blob/master/Python tips/automate.py/#L9)
+[source](https://github.com/LouisdeBruijn/Medium/blob/master/Python tips/automate.py/#L10)
 ```python
 .automate_mkdocs_from_docstring(
    mkdocs_dir: Union[str, Path], mkgendocs_f: str, repo_dir: Path,
