@@ -27,7 +27,7 @@ def parse_arguments():
 
 def print_df(df: pd.DataFrame, rows: int, exit_script: bool = False) -> None:
     """Prints a DataFrame.
-
+    
     Args:
         df (pandas.core.frame.DataFrame): tabular view to print.
         rows (int): the number of rows to print.
@@ -41,10 +41,10 @@ def print_df(df: pd.DataFrame, rows: int, exit_script: bool = False) -> None:
 
 def unescape_html(text: str) -> str:
     """Converts any HTML entities found in text to their textual representation.
-
+    
     Args:
         text (str): utterance that may contain HTML entities.
-
+    
     Examples:
         >>>
         >>> unescape_html("&nbsp;")
@@ -59,7 +59,7 @@ def unescape_html(text: str) -> str:
         "≤"
         >>> unescape_html("&ge;")
         "≥"
-
+    
     Returns:
         str: utterance without HTML entities.
 
@@ -69,17 +69,17 @@ def unescape_html(text: str) -> str:
 
 def equal_array_items(x: List) -> bool:
     """Compares whether all array items are of the same type and content.
-
+    
     Args:
         x (typing.List): an array to compare list items in.
-
+    
     Examples:
         >>>
         >>> equal_array_items(["1", "1"])
         True
         >>> equal_array_items(["1", "2"])
         False
-
+    
     Returns:
         bool: True if all items in this list are equal, False otherwise.
 

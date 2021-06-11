@@ -44,15 +44,15 @@ def modular_sphinx_function():
 
 def modular_google_function(arg1: int) -> int:
     """< Summary. >.
-
+    
     Args:
         arg1 (int): <description>
-
+    
     Examples:
         >>>
         >>> modular_google_function(1)
         2
-
+    
     Returns:
         The sum of the first argument
 
