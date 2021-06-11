@@ -117,10 +117,7 @@ def docstring_from_type_hints(repo_dir: Path, overwrite_script: bool = False, te
                 if child.name not in ["main"]:
 
                     docstring_node = child.body[0]
-                    # TODO: add these functions to the mkgendocs file (so remove the whole regex stuff)
-                    module = importlib.import_module(
-                        script.stem
-                    )  # fill in script.stem, because you iterate over script as well
+                    module = importlib.import_module(script.stem)
 
                     f_ = getattr(module, child.name)
                     type_hints = get_type_hints(f_)  # the same as f_.__annotations__
