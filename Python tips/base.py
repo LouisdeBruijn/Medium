@@ -29,10 +29,9 @@ def print_df(df: pd.DataFrame, rows: int, exit_script: bool = False) -> None:
     """Prints a DataFrame.
 
     Args:
-        df (pd.DataFrame): tabular view to print.
+        df (pandas.core.frame.DataFrame): tabular view to print.
         rows (int): the number of rows to print.
         exit_script (bool): whether to exit the script.
-
     """
     with pd.option_context("display.max_rows", None, "display.max_columns", None):
         print(df.head(rows))
@@ -72,7 +71,7 @@ def equal_array_items(x: List) -> bool:
     """Compares whether all array items are of the same type and content.
 
     Args:
-        x (List): an array to compare list items in.
+        x (typing.List): an array to compare list items in.
 
     Examples:
         >>>

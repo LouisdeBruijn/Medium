@@ -46,7 +46,7 @@ def modular_google_function(arg1: int) -> int:
     """< Summary. >.
 
     Args:
-        arg1 (<variable_type>): <description>
+        arg1 (int): <description>
 
     Examples:
         >>>
