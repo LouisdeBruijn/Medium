@@ -30,7 +30,7 @@ repos:
       entry: flake8
       language: system
       types: [python]
-      args: ["--max-line-length=120", "--ignore=D100,D104,E402,W503,E501", "--docstring-convention=google"]
+      args: ["--max-line-length=120", "--ignore=D100,D104,E402,W503,E501,E203", "--docstring-convention=google"]
     - id: automate_functions
       name: Add functions to mkgendocs configurations YAML
       entry: bash -c "python3 Python\ tips/automate.py; git add -u" --

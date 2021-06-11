@@ -1,3 +1,4 @@
+astpretty==2.1.0  # pretty print an AST parse tree
 pre-commit==2.13.0  # pre-commit hooks in .git protocol
 black==21.5b1  # linter
 isort==5.8.0  # sorts import statements

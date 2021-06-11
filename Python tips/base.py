@@ -29,7 +29,6 @@ def print_df(df: pd.DataFrame, rows: int, exit_script: bool = False) -> None:
     """Prints a DataFrame.
 
     Args:
-
         df (pd.DataFrame): tabular view to print.
         rows (int): the number of rows to print.
         exit_script (bool): whether to exit the script.
@@ -45,11 +44,9 @@ def unescape_html(text: str) -> str:
     """Converts any HTML entities found in text to their textual representation.
 
     Args:
-
         text (str): utterance that may contain HTML entities.
 
     Examples:
-
         >>>
         >>> unescape_html("&nbsp;")
         ""
@@ -78,7 +75,6 @@ def equal_array_items(x: List) -> bool:
         x (List): an array to compare list items in.
 
     Examples:
-
         >>>
         >>> equal_array_items(["1", "1"])
         True

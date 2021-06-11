@@ -29,7 +29,7 @@ def parse_arguments():
 
 
 def modular_sphinx_function():
-    """< Summary. >
+    """< Summary. >.
 
     :param <variable_name>: <variable_description>, defaults to <default_value>
     :type <variable_name>: <variable_type>(, optional)
@@ -43,19 +43,17 @@ def modular_sphinx_function():
 
 
 def modular_google_function(arg1: int) -> int:
-    """< Summary. >
+    """< Summary. >.
 
     Args:
-        arg1 (<variable_type): <description>
+        arg1 (<variable_type>): <description>
 
     Examples:
-
         >>>
         >>> modular_google_function(1)
         2
 
     Returns:
-
         The sum of the first argument
 
     """
@@ -63,7 +61,7 @@ def modular_google_function(arg1: int) -> int:
 
 
 def main():
-
+    """Execute when running this script."""
     info("Running the main program.")
 
     print(modular_sphinx_function)

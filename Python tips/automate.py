@@ -1,5 +1,6 @@
 """Automates Python scripts formatting, linting and Mkdocs documentation."""
 
+import ast
 import importlib
 import re
 from collections import defaultdict
@@ -106,38 +107,40 @@ def docstring_from_type_hints(repo_dir: Path, overwrite_script: bool = False) ->
     functions = defaultdict(list)
     for script in scripts:
 
-        new_arguments = {}
-        with open(script, "r") as file:
-            script_lines = file.readlines()
+        with open(script, "r") as source:
+            tree = ast.parse(source.read())
 
-            module = importlib.import_module(script.stem)
+        function_docs = []
+        for child in ast.iter_child_nodes(tree):
+            if isinstance(child, (ast.FunctionDef, ast.ClassDef, ast.AsyncFunctionDef)):
+                if child.name not in ["main"]:
 
-            for idx, line in enumerate(script_lines):
-                if line.startswith("def ") and "main()" not in line:
+                    docstring_node = child.body[0]
+                    # TODO: add these functions to the mkgendocs file (so remove the whole regex stuff)
+                    module = importlib.import_module(
+                        script.stem
+                    )  # fill in script.stem, because you iterate over script as well
 
-                    function = re.split("def |\\(", line)[1]
+                    f_ = getattr(module, child.name)
+                    type_hints = get_type_hints(f_)  # the same as f_.__annotations__
+                    return_hint = type_hints.pop("return", None)
+                    function = f_.__name__
                     functions[script].append(function)
 
-                    f_ = getattr(module, function)
-                    type_hints = get_type_hints(f_)
-
-                    return_hint = type_hints.pop("return", None)
                     if type_hints:
 
-                        file = "".join(script_lines[idx:])
-                        raw_docstring = re.search(r'((?:"){1,3})([^"]+)\1', file)
+                        docstring = f'"""{ast.get_docstring(child, clean=True)}\n"""'
+                        docstring_lines = docstring.split("\n")
 
-                        if raw_docstring:
-
-                            docstring_content = raw_docstring.group()
-                            # docstring_lines = docstring_content.split("\n")
+                        if docstring:
 
                             args = re.search(
-                                r'    Args:(.*?)(    Example[s]?:|    Return[s]?:|    """)',
-                                docstring_content,
+                                r'Args:(.*?)(Example[s]?:|Return[s]?:|""")',
+                                docstring,
                                 re.DOTALL,
                             )
 
+                            new_arguments = {}
                             if args:
 
                                 arguments = args.group()
@@ -172,8 +175,8 @@ def docstring_from_type_hints(repo_dir: Path, overwrite_script: bool = False) ->
                                                     argument,
                                                 )
 
-                                                idx = script_lines.index(f"{argument}\n")
-                                                new_arguments[idx] = f"{new_argument_docstring}\n"
+                                                idx = docstring_lines.index(f"{argument}")
+                                                new_arguments[idx] = f"{new_argument_docstring}"
 
                                             else:
                                                 print(f"no variable type in the argument: {arg_name}")
@@ -183,84 +186,114 @@ def docstring_from_type_hints(repo_dir: Path, overwrite_script: bool = False) ->
                                         print(f"no docstring for this argument: {arg_name}")
                             else:
                                 print(f"there are no arguments in this docstring: {function}")
-                        else:
-                            print(f"no docstring for function: {function}")
 
-                        if return_hint:
+                            if return_hint:
 
-                            raw_return = re.search(
-                                r'    Return[s]?:(.*?)(    """)',
-                                docstring_content,
-                                re.DOTALL,
+                                raw_return = re.search(
+                                    # r'(?<=Returns:\n).*',
+                                    r"Return[s]?:\n(.*)",
+                                    docstring,
+                                    re.DOTALL,
+                                )
+
+                                if raw_return:
+
+                                    return_argument = raw_return.group(1)
+                                    return_lines = return_argument.split("\n")
+
+                                    exclude = ["Returns:", '"""']
+
+                                    return_lines = [return_arg for return_arg in return_lines if return_arg]
+                                    return_lines = [
+                                        return_arg
+                                        for return_arg in return_lines
+                                        if not any(x in return_arg for x in exclude)
+                                    ]
+
+                                    if return_lines and len(return_lines) == 1:
+
+                                        return_arg = return_lines[0]
+                                        if return_arg.split(":"):
+
+                                            variable_type = str(return_hint)
+                                            class_type = re.search(r"(<class ')(.*)('>)", variable_type)
+                                            if class_type:
+                                                variable_type = class_type.group(2)
+
+                                            new_return_docstring = re.sub(
+                                                r"\S(.*:)",
+                                                f"{variable_type}:",
+                                                return_arg,
+                                            )
+
+                                            idx = docstring_lines.index(f"{return_arg}")
+                                            new_arguments[idx] = f"{new_return_docstring}\n"
+
+                                        else:
+                                            print(f"no variable-type in return statement docstring: {function}")
+                                    else:
+                                        print(f"no return statement docstring argument: {function}")
+                                else:
+                                    print(f"no return argument in docstring for function: {function}")
+                            else:
+                                print(f"no return type-hint for function: {function}")
+
+                            sorted_arguments = sorted(new_arguments.items(), reverse=True)
+                            for (idx, new_arg) in sorted_arguments:
+                                docstring_lines[idx] = new_arg
+
+                            docstring_lines = [f"{' '*docstring_node.col_offset}{line}" for line in docstring_lines]
+                            new_docstring = "\n".join(docstring_lines)
+
+                            function_docs.append(
+                                (
+                                    docstring_node.lineno,
+                                    {
+                                        "function_name": function,
+                                        "col_offset": docstring_node.col_offset,
+                                        "begin_lineno": docstring_node.lineno,
+                                        "end_lineno": docstring_node.end_lineno,
+                                        "value": new_docstring,
+                                    },
+                                )
                             )
 
-                            if raw_return:
-
-                                return_argument = raw_return.group()
-                                return_lines = return_argument.split("\n")
-
-                                exclude = ["Returns:", '"""']
-
-                                return_lines = [return_arg for return_arg in return_lines if return_arg]
-                                return_lines = [
-                                    return_arg
-                                    for return_arg in return_lines
-                                    if not any(x in return_arg for x in exclude)
-                                ]
-
-                                if return_lines and len(return_lines) == 1:
-
-                                    return_arg = return_lines[0]
-                                    if return_arg.split(":"):
-
-                                        variable_type = str(return_hint)
-                                        class_type = re.search(r"(<class ')(.*)('>)", variable_type)
-                                        if class_type:
-                                            variable_type = class_type.group(2)
-
-                                        new_return_docstring = re.sub(
-                                            r"\S(.*:)",
-                                            f"{variable_type}:",
-                                            return_arg,
-                                        )
-
-                                        idx = script_lines.index(f"{return_arg}\n")
-                                        new_arguments[idx] = f"{new_return_docstring}\n"
-
-                                    else:
-                                        print(f"no variable-type in return statement docstring: {function}")
-                                else:
-                                    print(f"no return statement docstring argument: {function}")
-
-                            else:
-                                print(f"no return argument in docstring for function: {function}")
+                            # print(ast.unparse(child))
+                            # you would be able to use ast.unparse(child), however this does not include # comments.
+                            # https://stackoverflow.com/questions/768634/parse-a-py-file-read-the-ast-modify-it-then-write-back-the-modified-source-c
 
                         else:
-                            print(f"no return type-hint for function: {function}")
-
+                            print(f"no docstring for function: {function}")
                     else:
                         print(f"no type-hints for function: {function}")
 
-        sorted_arguments = sorted(new_arguments.items(), reverse=True)
+        with open(script, "r") as file:
+            script_lines = file.readlines()
 
-        for (idx, new_arg) in sorted_arguments:
-            script_lines[idx] = new_arg
+        function_docs.sort(key=lambda x: x[0], reverse=True)
+        for (idx, docstring_attr) in function_docs:
+            script_lines = (
+                script_lines[: docstring_attr["begin_lineno"] - 1]
+                + [f'{docstring_attr["value"]}\n']
+                + script_lines[docstring_attr["end_lineno"] :]
+            )
 
-        if overwrite_script:
-            with open(script, "w") as script_file:
-                script_file.writelines(script_lines)
+        if script.stem in ["automate"]:
+            if overwrite_script:
+                with open(script, "w") as script_file:
+                    script_file.writelines(script_lines)
 
-            print(f"Automated docstring generation from type hints: {script}")
-            break
+                print(f"Automated docstring generation from type hints: {script}")
 
     return "Docstring generation from type-hints complete!"
 
 
 def main():
     """Execute when running this script."""
+    # python_tips_dir = Path.cwd().joinpath("Medium/Python tips")
     python_tips_dir = Path.cwd().joinpath("Python tips")
 
-    docstring_from_type_hints(python_tips_dir, overwrite_script=True)
+    # docstring_from_type_hints(python_tips_dir, overwrite_script=True)
 
     automate_mkdocs_from_docstring(
         mkdocs_dir="scripts",
