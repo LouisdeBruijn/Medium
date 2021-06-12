@@ -4,6 +4,21 @@ exclude: '^$'
 default_language_version:
   python: python3.7
 repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.0.1
+    hooks:
+    - id: trailing-whitespace
+    - id: end-of-file-fixer
+    - id: double-quote-string-fixer
+    - id: check-docstring-first
+    - id: check-yaml
+    - id: debug-statements
+    - id: name-tests-test
+    - id: requirements-txt-fixer
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v0.812
+    hooks:
+    - id: mypy
   - repo: local
     hooks:
     - id: autoflake
