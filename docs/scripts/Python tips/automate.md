@@ -40,7 +40,7 @@ Automates the -pages for mkgendocs package by adding all Python functions in a d
 
 
 ### indent
-[source](https://github.com/LouisdeBruijn/Medium/blob/master/Python tips/automate.py/#L80)
+[source](https://github.com/LouisdeBruijn/Medium/blob/master/Python tips/automate.py/#L84)
 ```python
 .indent(
    string: str
@@ -53,7 +53,7 @@ Count the indentation in whitespace characters.
 
 **Args**
 
-* **string** (str) : str
+* **string** (str) : text with indents
 
 
 **Returns**
@@ -65,7 +65,7 @@ Count the indentation in whitespace characters.
 
 
 ### docstring_from_type_hints
-[source](https://github.com/LouisdeBruijn/Medium/blob/master/Python tips/automate.py/#L93)
+[source](https://github.com/LouisdeBruijn/Medium/blob/master/Python tips/automate.py/#L97)
 ```python
 .docstring_from_type_hints(
    repo_dir: Path, overwrite_script: bool = False, test: bool = True
@@ -78,9 +78,9 @@ Automate docstring argument variable-type from type-hints.
 
 **Args**
 
-* **repo_dir** (pathlib.Path) : textual directory to search for Python functions in
-* **overwrite_script** (bool) : enables automatic overwriting of Python scripts in repo_dir
-* **test** (bool) : whether to write script content to a test_it.py file
+* **repo_dir** (< nothing >) : textual directory to search for Python functions in
+* **overwrite_script** (< wrong variable type>) : enables automatic overwriting of Python scripts in repo_dir
+* **test** (Something completely different) : whether to write script content to a test_it.py file
 
 
 **Returns**

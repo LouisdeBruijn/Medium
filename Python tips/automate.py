@@ -12,17 +12,17 @@ def automate_mkdocs_from_docstring(
     mkdocs_dir: Union[str, Path], mkgendocs_f: str, repo_dir: Path, match_string: str
 ) -> str:
     """Automates the -pages for mkgendocs package by adding all Python functions in a directory to the mkgendocs config.
-    
+
     Args:
         mkdocs_dir (typing.Union[str, pathlib.Path]): textual directory for the hierarchical directory & navigation in Mkdocs
         mkgendocs_f (str): The configurations file for the mkgendocs package
         repo_dir (pathlib.Path): textual directory to search for Python functions in
         match_string (str): the text to be matches, after which the functions will be added in mkgendocs format
-    
+
     Example:
         >>>
         >>> automate_mkdocs_from_docstring('scripts', repo_dir=Path.cwd(), match_string='pages:')
-    
+
     Returns:
         str: feedback message
 
@@ -35,13 +35,17 @@ def automate_mkdocs_from_docstring(
 
     functions = defaultdict(list)
     for script in scripts:
-        with open(script, "r") as file:
-            lines = file.readlines()
 
-            for line in lines:
-                if line.startswith("def ") and "main()" not in line:
+        with open(script, "r") as source:
+            tree = ast.parse(source.read())
 
-                    function = re.split("def |\\(", line)[1]
+        for child in ast.iter_child_nodes(tree):
+            if isinstance(child, (ast.FunctionDef, ast.ClassDef, ast.AsyncFunctionDef)):
+                if child.name not in ["main"]:
+
+                    module = importlib.import_module(script.stem)
+                    f_ = getattr(module, child.name)
+                    function = f_.__name__
                     functions[script].append(function)
 
     with open(f"{repo_dir}/{mkgendocs_f}", "r+") as mkgen_config:
@@ -79,10 +83,10 @@ def automate_mkdocs_from_docstring(
 
 def indent(string: str) -> int:
     """Count the indentation in whitespace characters.
-    
+
     Args:
-        string (str): str
-    
+        string (str): text with indents
+
     Returns:
         int: Number of whitespace indentations
 
@@ -92,12 +96,12 @@ def indent(string: str) -> int:
 
 def docstring_from_type_hints(repo_dir: Path, overwrite_script: bool = False, test: bool = True) -> str:
     """Automate docstring argument variable-type from type-hints.
-    
+
     Args:
-        repo_dir (pathlib.Path): textual directory to search for Python functions in
-        overwrite_script (bool): enables automatic overwriting of Python scripts in repo_dir
-        test (bool): whether to write script content to a test_it.py file
-    
+        repo_dir (< nothing >): textual directory to search for Python functions in
+        overwrite_script (< wrong variable type>): enables automatic overwriting of Python scripts in repo_dir
+        test (Something completely different): whether to write script content to a test_it.py file
+
     Returns:
         str: feedback message
 
@@ -289,8 +293,8 @@ def docstring_from_type_hints(repo_dir: Path, overwrite_script: bool = False, te
 
 def main():
     """Execute when running this script."""
-    # python_tips_dir = Path.cwd().joinpath("Medium/Python tips")
-    python_tips_dir = Path.cwd().joinpath("Python tips")
+    python_tips_dir = Path.cwd().joinpath("Medium/Python tips")
+    # python_tips_dir = Path.cwd().joinpath("Python tips")
 
     docstring_from_type_hints(python_tips_dir, overwrite_script=True, test=False)
 
