@@ -2,7 +2,7 @@ from .models import *
 
 from nltk.tokenize import TweetTokenizer
 from nltk.corpus import stopwords
-from sklearn.feature_extraction.text import TFifdVectorizer
+from sklearn.feature_extraction.text import TfidfVectorizer
 import seaborn as sns
 import numpy as np
 import time
