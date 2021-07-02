@@ -4,6 +4,7 @@ from nltk.tokenize import TweetTokenizer
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TFifdVectorizer
 import seaborn as sns
+import numpy as np
 import time
 import re
 import json
