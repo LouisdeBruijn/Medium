@@ -4,20 +4,20 @@ repo: https://github.com/LouisdeBruijn/Medium
 version: master
 
 pages:
-  - page: "scripts/Python tips/automate.md"
-    source: "Python tips/automate.py"
+  - page: "scripts/Python_tips/automate.md"
+    source: "Python_tips/automate.py"
     functions:
       - automate_mkdocs_from_docstring
       - indent
       - docstring_from_type_hints
-  - page: "scripts/Python tips/format.md"
-    source: "Python tips/format.py"
+  - page: "scripts/Python_tips/format.md"
+    source: "Python_tips/format.py"
     functions:
       - parse_arguments
       - modular_sphinx_function
       - modular_google_function
-  - page: "scripts/Python tips/base.md"
-    source: "Python tips/base.py"
+  - page: "scripts/Python_tips/base.md"
+    source: "Python_tips/base.py"
     functions:
       - parse_arguments
       - print_df

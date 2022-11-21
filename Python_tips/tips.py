@@ -3,8 +3,8 @@ def main():
     """use pathlib for Python >= 3.4"""
     from pathlib import Path
 
-    directory = Path("main_dir", "sub_dir")
-    file = "example.json"
+    directory = Path('main_dir', 'sub_dir')
+    file = 'example.json'
 
     print(Path(directory, file))
     # >>> "main_dir/sub_dir/example.json"
@@ -12,25 +12,25 @@ def main():
     """use os for Python < 3.4"""
     import os
 
-    directory = os.path.join("main_dir", "sub_dir")
-    file = "example.json"
+    directory = os.path.join('main_dir', 'sub_dir')
+    file = 'example.json'
 
     print(os.path.join(directory, file))
     # >>> "main_dir/sub_dir/example.json"
 
     """variable unpacking"""
 
-    name, age, job = ["Pietje Puk", 27, "Data Scientist"]  # unpack lists & tuples
+    name, age, job = ['Pietje Puk', 27, 'Data Scientist']  # unpack lists & tuples
 
-    a, b, c = "123"  # unpack strings
+    a, b, c = '123'  # unpack strings
     # >>> a
     # '1'
 
-    a, b, c = (i ** 2 for i in range(2, 5))  # unpack generator
+    a, b, c = (i**2 for i in range(2, 5))  # unpack generator
     # >>> a
     # 4
 
-    person = {"name": "Pietje Puk", "age": 27, "profession": "Data Scientist"}
+    person = {'name': 'Pietje Puk', 'age': 27, 'profession': 'Data Scientist'}
 
     a, b, c = person  # unpacking dictionary keys
     # >>> a
@@ -46,8 +46,8 @@ def main():
 
     """keyword arguments"""
     persons = [
-        {"first_name": "Louis", "last_name": "de Bruijn", "age": 26, "profession": "Data Scientist"},
-        {"first_name": "Pietje", "last_name": "Puk", "age": 18, "profession": "student"},
+        {'first_name': 'Louis', 'last_name': 'de Bruijn', 'age': 26, 'profession': 'Data Scientist'},
+        {'first_name': 'Pietje', 'last_name': 'Puk', 'age': 18, 'profession': 'student'},
     ]
 
     for cnt, person in enumerate(persons):
@@ -66,7 +66,7 @@ def main():
     # [1, 2, 3, 4, 5]
 
     # dictionaries: {key: value for element in iterator}
-    alphabet = "abcde"
+    alphabet = 'abcde'
 
     dictionary = {}
     for i in range(1, 6):
@@ -102,16 +102,16 @@ def main():
     # Example 1: shuffle data to ensure random class distribution in train/test split
     import random
 
-    documents = ["positive tweet message", "negative tweet message"]
-    labels = ["pos", "neg"]
+    documents = ['positive tweet message', 'negative tweet message']
+    labels = ['pos', 'neg']
 
     tuples = [(doc, label) for doc, label in zip(documents, labels)]
     random.shuffle(tuples)
     X, Y = zip(*tuples)
 
     # Example 2: merging two dictionaries
-    first_dictionary = {"A": 1, "B": 2}
-    second_dictionary = {"C": 3, "D": 4}
+    first_dictionary = {'A': 1, 'B': 2}
+    second_dictionary = {'C': 3, 'D': 4}
     {**first_dictionary, **second_dictionary}
 
     # >>> merged_dictionary
@@ -120,10 +120,10 @@ def main():
     # Example 3: dropping unneccesary function variables
     def return_stuff():
         """Example function that returns data."""
-        return "This", "is", "interesting", "This", "is", "not"
+        return 'This', 'is', 'interesting', 'This', 'is', 'not'
 
     a, b, c, *_ = return_stuff()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

@@ -294,8 +294,8 @@ def docstring_from_type_hints(repo_dir: Path, overwrite_script: bool = False, te
 
 def main():
     """Execute when running this script."""
-    python_tips_dir = Path.cwd().joinpath('Medium/Python tips')
-    # python_tips_dir = Path.cwd().joinpath("Python tips")
+    python_tips_dir = Path.cwd().joinpath('Medium/Python_tips')
+    # python_tips_dir = Path.cwd().joinpath("Python_tips")
 
     docstring_from_type_hints(python_tips_dir, overwrite_script=True, test=False)
 
