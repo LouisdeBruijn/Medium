@@ -28,6 +28,7 @@ def parse_arguments():
     return args
 
 
+
 def modular_sphinx_function():
     """< Summary. >.
 
