@@ -1,20 +1,22 @@
 astpretty==2.1.0  # pretty print an AST parse tree
-pre-commit==2.13.0  # pre-commit hooks in .git protocol
-black==21.5b1  # linter
-isort==5.8.0  # sorts import statements
-flake8==3.9.2  # PEP8 conventions
-pep8-naming==0.11.1  # variable naming conventions support for flake8
-flake8-docstrings==1.6.0  # enables flake8 Google-style docstring linting
 autoflake==1.4  # removes unused import statements
-mkdocs==1.1.2  # static site generator for documentation in Markdown
-mkdocs-material==7.1.5  # Material support for MkDocs
-mkdocs-minify-plugin==0.4.0  # strips whitespaces in HTML markdown documentation pages
-mkdocs-git-revision-date-localized-plugin==0.9.2  # displays the date of the last git modification of a markdown page
-mkdocs-git-authors-plugin==0.3.3  # displays git authors of a markdown page
-mkdocs-table-reader-plugin==0.5  # enables automatic CSV imports as a table into a markdown page
-mkdocs-img2fig-plugin==0.9.3  # converts markdown encoded images to HTML figures
-mknotebooks==0.7.0  # enables inclusion of Jupyter notebook in markdown page
+black>=22.3.0  # linter
+flake8==3.9.2  # PEP8 conventions
+flake8-docstrings==1.6.0  # enables flake8 Google-style docstring linting
+importlib-metadata<5.0 # removed deprecated function EntryPoints.get
+isort==5.8.0  # sorts import statements
+mkdocs  # static site generator for documentation in Markdown
 mkdocs-awesome-pages-plugin==2.5.0  # enables naive configuration of page titles and their order
 mkdocs-enumerate-headings-plugin==0.4.4  # enumerates headings across markdown pages
+mkdocs-git-authors-plugin==0.3.3  # displays git authors of a markdown page
+mkdocs-git-revision-date-localized-plugin==0.9.2  # displays the date of the last git modification of a markdown page
+mkdocs-img2fig-plugin==0.9.3  # converts markdown encoded images to HTML figures
+mkdocs-material==7.1.5  # Material support for MkDocs
+mkdocs-minify-plugin==0.4.0  # strips whitespaces in HTML markdown documentation pages
 mkdocs-print-site-plugin==1.2.3  # allows visiters to File > Print > Save as PDF entire markdown documentation
+mkdocs-table-reader-plugin==0.5  # enables automatic CSV imports as a table into a markdown page
 mkgendocs==0.8.1  # generate MkDocs pages from Google-style docstrings of Python functions
+mknotebooks==0.7.0  # enables inclusion of Jupyter notebook in markdown page
+mypy==0.991  #
+pep8-naming==0.11.1  # variable naming conventions support for flake8
+pre-commit==2.13.0  # pre-commit hooks in .git protocol
