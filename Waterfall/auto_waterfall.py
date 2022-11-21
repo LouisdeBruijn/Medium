@@ -64,12 +64,13 @@ class LogDebugContext:
         """Exit the trace."""
         sys.settrace = None
 
-    def trace_calls(self, frame, event):
+    def trace_calls(self, frame, event, arg):
         """Trace calls.
 
         Args:
             frame (): a tracing frame
             event (): a tracing event
+            arg (): a tracing argument
 
         Returns:
             traced_lines (): traced lines
@@ -89,12 +90,13 @@ class LogDebugContext:
 
         return traced_lines
 
-    def trace_lines(self, frame, event):
+    def trace_lines(self, frame, event, arg):
         """Trace lines.
 
         Args:
             frame (): a tracing frame
             event (): a tracing event
+            arg (): a tracing argument
 
         Returns:
             None
