@@ -74,18 +74,18 @@ class LogDebugContext:
         Returns:
             traced_lines (): traced lines
         """
-        if event != "call":
+        if event != 'call':
             # we want to only trace our call to the decorated function
             return
         elif frame.f_code.co_name != self.name:
             # return the trace function to use when you go into that function call
             return
 
-        self.log.init_md(md_title="Waterfall California housing dataset")  # initializes table markdown file
+        self.log.init_md(md_title='Waterfall California housing dataset')  # initializes table markdown file
 
         traced_lines = self.trace_lines
 
-        logging.info(f"Logged variables {self.vars_to_log}.")
+        logging.info(f'Logged variables {self.vars_to_log}.')
 
         return traced_lines
 
@@ -99,7 +99,7 @@ class LogDebugContext:
         Returns:
             None
         """
-        if event not in ["line", "return"]:
+        if event not in ['line', 'return']:
             return
 
         local_vars = frame.f_locals
@@ -110,33 +110,33 @@ class LogDebugContext:
                 df = local_vars[var_name]
                 if df is not self.previous_df:
 
-                    self.log.line(df, reason="filtering step", conf_flag="n/a")
+                    self.log.line(df, reason='filtering step', conf_flag='n/a')
                     self.previous_df = df
 
         self.log.create_md()
 
 
 auto_generate_log = LogWaterfall(
-    dir_path=f"{os.getcwd()}/tmd/",
-    tb_name="california_housing",
+    dir_path=f'{os.getcwd()}/tmd/',
+    tb_name='california_housing',
     identifier=None,
-    tmd_section="1_data_source",
-    file_name="auto_waterfall",
+    tmd_section='1_data_source',
+    file_name='auto_waterfall',
     append=False,
 )
 
 
-@LogVariables(vars_to_log=["california_housing_df"], log=auto_generate_log)
+@LogVariables(vars_to_log=['california_housing_df'], log=auto_generate_log)
 def main():
     """Main function."""
     california_housing = datasets.fetch_california_housing(as_frame=True)
     california_housing_df = california_housing.frame
 
     settings = {
-        "min_bedrooms": 1.0,
-        "max_occupants": 2.0,
-        "house_age": [10, 80],
-        "join_new_houses": True,
+        'min_bedrooms': 1.0,
+        'max_occupants': 2.0,
+        'house_age': [10, 80],
+        'join_new_houses': True,
     }
 
     california_housing_df = filter_bedrooms(california_housing_df, settings)
@@ -145,9 +145,9 @@ def main():
 
     california_housing_df = filter_house_age_range(california_housing_df, settings)
 
-    if settings["join_new_houses"]:
+    if settings['join_new_houses']:
         california_housing_df = join_new_house_data(california_housing_df, california_housing.frame)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
