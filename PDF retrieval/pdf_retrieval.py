@@ -18,7 +18,7 @@ def fonts(doc, granularity=False):
     font_counts = {}
 
     for page in doc:
-        blocks = page.getText("dict")["blocks"]
+        blocks = page.get_text("dict")["blocks"]
         for b in blocks:  # iterate through the text blocks
             if b['type'] == 0:  # block contains text
                 for l in b["lines"]:  # iterate through the text lines
@@ -93,7 +93,7 @@ def headers_para(doc, size_tag):
     previous_s = {}  # previous span
 
     for page in doc:
-        blocks = page.getText("dict")["blocks"]
+        blocks = page.get_text("dict")["blocks"]
         for b in blocks:  # iterate through the text blocks
             if b['type'] == 0:  # this block contains text
 
