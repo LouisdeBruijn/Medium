@@ -33,7 +33,7 @@ logging.basicConfig(
 
 
 class LogWaterfall:
-    """Logs a table on each filtering steps in waterfall fashion in a Markdown file."""
+    """Logs a table on each filtering step in waterfall fashion in a Markdown file."""
 
     def __init__(
         self, dir_path: str, tb_name: str, identifier: Optional[str], tmd_section: str, file_name: str, append: bool
@@ -57,14 +57,11 @@ class LogWaterfall:
         self.mdFile = MdUtils(self.file_path)
         self.append = append
 
-    def init_or_append_md(self, df: Union[pd.DataFrame, sparkDataFrame]):
+    def init_or_append_md(self, df: Union[pd.DataFrame, sparkDataFrame]) -> None:
         """Initializes a new Markdown file or appends to existing file.
 
         Args:
             df (spark.DataFrame, pd.DataFrame): DataFrame that the filtering is applied to
-
-        Returns:
-            None
         """
         logging.info('Waterfall logging enabled.')
         if self.append and os.path.exists(self.file_path):
@@ -75,14 +72,12 @@ class LogWaterfall:
             self.line(df=df, reason='Raw California housing data', conf_flag='n/a')
             logging.info('Creating new markdown file.')
 
-    def init_md(self, md_title: str):
+    def init_md(self, md_title: str) -> None:
         """Creates the header of a new Markdown file.
 
         Args:
             md_title (str): title of the Markdown file
 
-        Returns:
-            None
         """
         self.mdFile.new_line(text=md_title, bold_italics_code='i')
         self.mdFile.new_line(text='')
@@ -97,12 +92,8 @@ class LogWaterfall:
             wrap_width=125,
         )
 
-    def set_previous_values(self):
-        """Read existing Markdown file and sets column values for self.previous_entries and self.previous_unique_cust.
-
-        Returns:
-            None
-        """
+    def set_previous_values(self) -> None:
+        """Read existing Markdown file and sets column values for self.previous_entries and self.previous_unique_cust."""
         self.mdFile.read_md_file(file_name=self.file_path)
 
         with open(self.file_path, 'r') as md_file:
@@ -121,7 +112,7 @@ class LogWaterfall:
         reason: str = 'filtering step',
         conf_flag: Any = 'n/a',
         tb_name: str = None,
-    ):
+    ) -> None:
         """Adds a line with the table filtering action for the Markdown file.
 
         Args:
@@ -129,9 +120,6 @@ class LogWaterfall:
             reason (str): The reason for this specific DataFrame filtering
             conf_flag (str): which configuration flag is used from .yaml files
             tb_name (str): the table name that this action is to
-
-        Returns:
-            None
         """
         tb_name = self.tb_name if not tb_name else tb_name
 
@@ -177,16 +165,12 @@ class LogWaterfall:
         md_line = f"| {' | '.join((str(col) for col in columns))} |"
         self.mdFile.new_line(text=md_line, wrap_width=len(md_line))
 
-    def create_md(self):
-        """Creates the Markdown file.
-
-        Returns:
-            None
-        """
+    def create_md(self) -> None:
+        """Creates the Markdown file."""
         self.mdFile.create_md_file()
 
 
-def plot_waterfall_markdowns(path_table: str, path_image: str, file_name: str, tmd_section: str):
+def plot_waterfall_markdowns(path_table: str, path_image: str, file_name: str, tmd_section: str) -> None:
     """Reads all Markdown waterfall tables in TMD and generates plots for all.
 
     Args:
@@ -194,9 +178,6 @@ def plot_waterfall_markdowns(path_table: str, path_image: str, file_name: str, t
         path_image (str): location to save images
         file_name (str): name of the markdown files
         tmd_section (str): tmd section name
-
-    Returns:
-        None
     """
     waterfall_md_files = [f for f in os.listdir(path_table) if f.startswith(f'{tmd_section}_{file_name}')]
 
@@ -256,7 +237,7 @@ def plot_waterfall_markdowns(path_table: str, path_image: str, file_name: str, t
                 text=texts,
                 y=y_axes,
                 connector={'line': {'color': 'rgba(0,0,0,0)'}},
-                totals={'marker': {'color': '#ff6600', 'line': {'color': '#ff6600', 'width': 1}}},
+                totals={'marker': {'color': '#dee2e6', 'line': {'color': '#dee2e6', 'width': 1}}},
             )
         )
 
@@ -338,3 +319,9 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+# @todo: turn it into a package
+# @todo: create a new repo
+# @todo: write documentation
+# @todo: write unit-tests
