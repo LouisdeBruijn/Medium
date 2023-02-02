@@ -1,5 +1,7 @@
-from typing import Generator, Optional, Sequence
+import os
+from typing import Generator, Sequence
 
+import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -8,7 +10,7 @@ from matplotlib.patches import Patch
 from sklearn.datasets import make_classification
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
-from sklearn.model_selection import KFold, PredefinedSplit, StratifiedKFold
+from sklearn.model_selection import PredefinedSplit, StratifiedKFold
 
 
 def plot_evaluation(y: Sequence, y_predict: Sequence, title: str = "CV"):
@@ -43,7 +45,8 @@ def plot_evaluation(y: Sequence, y_predict: Sequence, title: str = "CV"):
         norm=norm,
         fmt=".5g",
     )
-    hm2.set(title=f"Classification report, accuracy {round(accuracy_score(y, y_predict), 2)}")
+    hm2.set(title="Classification report")
+    matplotlib.rcParams['axes.unicode_minus'] = False
     plt.show()
 
 
@@ -63,7 +66,7 @@ def _cross_val_predict(X: Sequence, y: Sequence, y_test: Sequence, splits: Gener
         for idx_pred, y_pred in zip(testing_indices, y_predict):
             y_predictions[idx_pred] = y_pred
 
-    plot_evaluation(y_test, y_predictions, title=f"{type(cv).__name__} {cv.n_splits}-folds")
+    plot_evaluation(y_test, y_predictions, title=f"{type(cv).__name__} {cv.n_splits}-folds {os.linesep} accuracy {round(accuracy_score(y_test, y_predictions), 3)}")
 
 
 class BoostedKFold:
@@ -87,16 +90,18 @@ class BoostedKFold:
         self.shuffle = shuffle
         self.random_state = random_state
 
-    def split(self, X: np.array, y: np.array, groups: Optional[np.array] = None):
+    def split(self, X: np.array, y: np.array, groups: np.array):
         """Generate indices to split data into training and test set, excluding data in groups with value '-1'.
 
         boosted sample data == '-1' in the ``groups`` parameter
         random sample data != '-1' in the ``groups`` parameter
 
         Args:
-            X (ndarray):
-            y (ndarray):
-            groups (ndarray): The groups '-1' for elements to be excluded
+            X (ndarray): array-like of shape (n_samples, n_features)
+                Training data, where `n_samples` is the number of samples and `n_features` is the number of features.
+            y (ndarray): array-like of shape (n_samples,),
+                The target variable for supervised learning problems.
+            groups (ndarray): array-like of shape 1d: '-1' for elements to be excluded
 
         Yields:
             train (ndarray): The training set indices for that split.
@@ -106,9 +111,9 @@ class BoostedKFold:
         boosted_indices = np.where(groups == -1)[0]
         random_indices = np.where(groups != -1)[0]
 
-        cv = StratifiedKFold(n_splits=self.n_splits, shuffle=self.shuffle)
+        skf = StratifiedKFold(n_splits=self.n_splits, shuffle=self.shuffle)
         # split the randomly sampled indices that are to be included in the test-set in ``n_splits`` splits
-        stratified_random_splits = cv.split(X[random_indices], y[random_indices])
+        stratified_random_splits = skf.split(X[random_indices], y[random_indices])
 
         random_sampled = [0] * len(random_indices)
         boosted_sampled = [-1] * len(boosted_indices)
@@ -122,9 +127,9 @@ class BoostedKFold:
         # concatenate the randomly sampled split numbers and the boosted sampling split numbers
         predefined_splits = random_sampled + boosted_sampled
         # boosted samples are not accounted for in the test-fold splits
-        cv = PredefinedSplit(test_fold=predefined_splits)
+        ps = PredefinedSplit(test_fold=predefined_splits)
 
-        return cv.split(X)
+        return ps.split(X)
 
     def plot(self, X: np.array, y: np.array, groups: np.array, splits: Sequence, ax, marker="_", lw=10):
         """Visualizes the CV split behavior."""
@@ -141,7 +146,7 @@ class BoostedKFold:
 
             x_axis = [x + 0.5 for x in range(len(indices))]
 
-            # Plot the cross validation split
+            # Plot the cross validation fold
             ax.scatter(
                 x_axis,
                 [ii + 0.5] * len(indices),
@@ -205,12 +210,12 @@ def test_boosted_kfold():
 
     cv = BoostedKFold(n_splits=n_splits, shuffle=True)
 
-    """
+    '''
     splits = cv.split(X, y, groups)
     random_sample = data[data['sample'] == 'random']
     y_random = random_sample[['label']].to_numpy()
     _cross_val_predict(X=X, y=y, y_test=y_random, splits=splits, cv=cv)
-    """
+    '''
 
     splits = cv.split(X, y, groups)
     fig, ax = plt.subplots()
@@ -219,21 +224,24 @@ def test_boosted_kfold():
     plt.show()
 
 
+
 def main():
     """"""
     test_boosted_kfold()
 
-    # ``flip_y`` has to be 0 for the actual class proportions ``weights`` to exactly match
-    X, y = make_classification(n_samples=10000, n_features=4, n_classes=2, weights=[0.95, 0.05], flip_y=0)
+    # `flip_y` has to be 0 for the actual class proportions `weights` to exactly match
+    X, y = make_classification(n_samples=1000, n_classes=2, weights=[0.95, 0.05], flip_y=0, shuffle=False)
     n_splits = 5
 
-    groups = y.copy()
-    boosted_n = round(0.8 * 0.05 * len(y))  # 80% of majority class (5%) of ``n_samples`` will be our boosted sampling
-    boosted_ind = np.where(groups == 1)[0][:boosted_n]  # indices of boosted samples
-    groups[boosted_ind] = -1  # replace indices of boosted samples value from ``1`` to ``-1`` for PredefinedSplit
-    groups[groups == 1] = 0  # replace the randomly samples positive class values to ``0``
+    # 80% of minority class of `n_samples` will be our boosted sample data
+    groups = np.ones(len(y))
+    boosted_sample_size = round(0.3 * 0.05 * len(groups))
+    minority_class_indices = np.where(y == 1)[0]
+    boosted_minority_class_indices = minority_class_indices[:boosted_sample_size]
+    # replace indices of boosted samples value to `-1` for BoostedKFold
+    groups[boosted_minority_class_indices] = -1
 
-    y_random_indices = np.where(groups == 0)[0]
+    y_random_indices = np.where(groups != -1)[0]
     y_random = y[y_random_indices]
 
     cv = BoostedKFold(n_splits=n_splits, shuffle=True)
@@ -243,21 +251,6 @@ def main():
     cv = StratifiedKFold(n_splits=n_splits, shuffle=True)
     splits = cv.split(X, y)
     _cross_val_predict(X=X, y=y, y_test=y, splits=splits, cv=cv)
-
-    cv = KFold(n_splits=n_splits, shuffle=True)
-    splits = cv.split(X, y)
-    _cross_val_predict(X=X, y=y, y_test=y, splits=splits, cv=cv)
-
-    # model_ = (
-    #     GridSearchCV(
-    #         estimator=model_pipeline,
-    #         param_grid=HYPERPARAMETERS,
-    #         scoring=SCORING_METRIC,
-    #         cv=cv,
-    #         n_jobs=N_JOBS_HYPERPARAMETERS,
-    #         verbose=VERBOSE,
-    #         return_train_score=True)
-    # ).fit(X=X, y=y['label'])
 
 
 if __name__ == "__main__":
