@@ -68,7 +68,7 @@ class BoostedKFold:
 
         return ps.split(X)
 
-    def plot(self, X: np.array, y: np.array, groups: np.array, splits: Sequence, ax, marker="_", lw=10):
+    def plot(self, X: np.array, y: np.array, groups: np.array, splits: Sequence, ax, marker='_', lw=10):
         """Visualizes the CV split behavior."""
         cmap_samples = plt.cm.Spectral
         cmap_groups = plt.cm.Accent
@@ -106,18 +106,18 @@ class BoostedKFold:
         )
 
         # format the visualization
-        yticklabels = list(range(self.n_splits)) + ["class", "group"]
+        yticklabels = list(range(self.n_splits)) + ['class', 'group']
         ax.set(
             yticks=np.arange(self.n_splits + 2) + 0.5,
             yticklabels=yticklabels,
-            xlabel="Sample index",
-            ylabel="CV iteration",
+            xlabel='Sample index',
+            ylabel='CV iteration',
             ylim=[self.n_splits + 2.2, -0.2],
             xlim=[0, len(X)],
             xticks=x_axis,
             xticklabels=range(len(X)),
         )
-        ax.set_title(f"{type(self).__name__}", fontsize=15)
+        ax.set_title(f'{type(self).__name__}', fontsize=15)
 
         ax.legend(
             [
@@ -128,7 +128,7 @@ class BoostedKFold:
                 Patch(color=cmap_samples(0.99)),
                 Patch(color=cmap_samples(0.01)),
             ],
-            ["Test", "Train", "0", "1", "Random", "Boosted"],
+            ['Test', 'Train', '0', '1', 'Random', 'Boosted'],
             loc=(1.02, 0.65),
         )
 

@@ -13,7 +13,7 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 from sklearn.model_selection import StratifiedKFold
 
 
-def plot_evaluation(y: Sequence, y_predict: Sequence, title: str = "CV"):
+def plot_evaluation(y: Sequence, y_predict: Sequence, title: str = 'CV'):
     """Plots the classification report and the confusion matrix."""
 
     conf_matrix = confusion_matrix(y, y_predict)
@@ -27,13 +27,13 @@ def plot_evaluation(y: Sequence, y_predict: Sequence, title: str = "CV"):
 
     fig.suptitle(title)
 
-    hm1 = sns.heatmap(df_cm, annot=True, fmt="g", cmap="crest", ax=ax1)
-    hm1.set(title="Confusion matrix", xlabel="Predicted", ylabel="True")
+    hm1 = sns.heatmap(df_cm, annot=True, fmt='g', cmap='crest', ax=ax1)
+    hm1.set(title='Confusion matrix', xlabel='Predicted', ylabel='True')
 
     # adjusts heatmap so that ``support`` column is white
     norm = plt.Normalize(vmin=df_clf.iloc[:-1, :-1].min().min(), vmax=df_clf.iloc[:, :-1].max().max())
-    cmap = plt.get_cmap("crest")
-    cmap.set_over("white")
+    cmap = plt.get_cmap('crest')
+    cmap.set_over('white')
 
     hm2 = sns.heatmap(
         data=df_clf.copy(),
@@ -43,10 +43,10 @@ def plot_evaluation(y: Sequence, y_predict: Sequence, title: str = "CV"):
         cmap=cmap,
         ax=ax2,
         norm=norm,
-        fmt=".5g",
+        fmt='.5g',
     )
-    hm2.set(title="Classification report")
-    matplotlib.rcParams["axes.unicode_minus"] = False
+    hm2.set(title='Classification report')
+    matplotlib.rcParams['axes.unicode_minus'] = False
     plt.show()
 
 
@@ -69,8 +69,8 @@ def _cross_val_predict(X: Sequence, y: Sequence, y_test: Sequence, splits: Gener
     plot_evaluation(
         y_test,
         y_predictions,
-        title=f"{type(cv).__name__} {cv.n_splits}-folds {os.linesep} "
-        f"accuracy {round(accuracy_score(y_test, y_predictions), 3)}",
+        title=f'{type(cv).__name__} {cv.n_splits}-folds {os.linesep} '
+        f'accuracy {round(accuracy_score(y_test, y_predictions), 3)}',
     )
 
 
@@ -78,21 +78,21 @@ def test_boosted_kfold_with_custom_dataset():
     """Test BoostedKfold CV with custom data sample."""
     n_splits = 3
 
-    data = pd.read_csv("data/sample.csv", index_col="id")
-    X = data[["feature_1", "feature_2"]].to_numpy()
-    y = data[["label"]].to_numpy()
-    groups = data[["sample"]].replace({"random": 0, "boosted": -1}, inplace=False).to_numpy()
+    data = pd.read_csv('data/sample.csv', index_col='id')
+    X = data[['feature_1', 'feature_2']].to_numpy()
+    y = data[['label']].to_numpy()
+    groups = data[['sample']].replace({'random': 0, 'boosted': -1}, inplace=False).to_numpy()
 
     cv = BoostedKFold(n_splits=n_splits, shuffle=True)
 
     splits = cv.split(X, y, groups)
-    random_sample = data[data["sample"] == "random"]
-    y_random = random_sample[["label"]].to_numpy()
+    random_sample = data[data['sample'] == 'random']
+    y_random = random_sample[['label']].to_numpy()
     _cross_val_predict(X=X, y=y, y_test=y_random, splits=splits, cv=cv)
 
     splits = cv.split(X, y, groups)
     fig, ax = plt.subplots()
-    cv.plot(X, y, groups, splits, ax, marker="o")
+    cv.plot(X, y, groups, splits, ax, marker='o')
     plt.subplots_adjust(left=0.13, right=0.81)
     plt.show()
 
@@ -130,5 +130,5 @@ def main():
     test_boosted_kfold_with_custom_dataset()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
