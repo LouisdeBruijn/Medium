@@ -5,7 +5,6 @@
 # Date: 27-01-2020
 
 
-from urllib.request import Request, urlopen
 import requests
 import random
 from bs4 import BeautifulSoup
@@ -87,7 +86,7 @@ def parse_url(url, proxy_pool=None, proxy_nr=None):
                 tries += 1
                 proxy = next(proxy_pool)
                 response = requests.get(url, headers=headers, proxies={"http": proxy, "https": proxy}, timeout=5.0)
-            except Exception as e:
+            except Exception:
                 print("Skipping. Connnection error. Tries {0}".format(tries))
 
     response = response.content
@@ -117,7 +116,7 @@ def chrono24_result_page(watch_brand, output_file):
     proxies = get_proxies()
     proxies_nr = len(proxies)
     print('Scraping {0} pages with {1} proxies.'.format(page_nr, proxies_nr))
-    proxy_pool = cycle(proxies)
+    cycle(proxies)
 
     with open(output_file, 'a') as spacy_rolex:
         if len(open('spacy_pages.csv').readlines()) < 1:
@@ -223,7 +222,7 @@ def scrape_chrono24(csv_main_details):
                 print(e)  # link is wrong, it does not go to a detail-page
 
             specs = table_div[0]
-            description = table_div[1]
+            table_div[1]
 
             ## SPECIFICATIONS
             table_bodies = specs.findAll('tbody')

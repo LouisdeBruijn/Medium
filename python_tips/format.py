@@ -12,18 +12,18 @@ from logging import error, info
 
 def parse_arguments():
     """Read arguments from a command line."""
-    parser = argparse.ArgumentParser(description='Arguments get parsed via --commands')
+    parser = argparse.ArgumentParser(description="Arguments get parsed via --commands")
     parser.add_argument(
-        '-v',
-        metavar='verbosity',
+        "-v",
+        metavar="verbosity",
         type=int,
         default=2,
-        help='Verbosity of logging: 0 -critical, 1- error, 2 -warning, 3 -info, 4 -debug',
+        help="Verbosity of logging: 0 -critical, 1- error, 2 -warning, 3 -info, 4 -debug",
     )
 
     args = parser.parse_args()
     verbose = {0: logging.CRITICAL, 1: logging.ERROR, 2: logging.WARNING, 3: logging.INFO, 4: logging.DEBUG}
-    logging.basicConfig(format='%(message)s', level=verbose[args.v], stream=sys.stdout)
+    logging.basicConfig(format="%(message)s", level=verbose[args.v], stream=sys.stdout)
 
     return args
 
@@ -39,7 +39,7 @@ def modular_sphinx_function():
     :rtype: <return_type>
     :return: <return_description>
     """
-    return 'This modular function with examplary Sphinx docstring conventions.'
+    return "This modular function with examplary Sphinx docstring conventions."
 
 
 def modular_google_function(arg1: int) -> int:
@@ -62,18 +62,18 @@ def modular_google_function(arg1: int) -> int:
 
 def main():
     """Execute when running this script."""
-    info('Running the main program.')
+    info("Running the main program.")
 
     print(modular_sphinx_function)
 
     print(modular_google_function(1))
 
     try:
-        'string' + 10
+        "string" + 10
     except Exception as e:
         error(str(e))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     args = parse_arguments()
     main()
