@@ -78,7 +78,7 @@ def test_boosted_kfold_with_custom_dataset():
     """Test BoostedKfold CV with custom data sample."""
     n_splits = 3
 
-    data = pd.read_csv('data/sample.csv', index_col='id')
+    data = pd.read_csv('cross_validation/data/sample.csv', index_col='id')
     X = data[['feature_1', 'feature_2']].to_numpy()
     y = data[['label']].to_numpy()
     groups = data[['sample']].replace({'random': 0, 'boosted': -1}, inplace=False).to_numpy()
