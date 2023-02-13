@@ -1,60 +1,23 @@
 import os
 from typing import Generator, Sequence
 
-import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import seaborn as sns
 from cv import BoostedKFold
 from sklearn.datasets import make_classification
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+from sklearn.metrics import accuracy_score
 from sklearn.model_selection import StratifiedKFold
 
-
-def plot_evaluation(y: Sequence, y_predict: Sequence, title: str = 'CV'):
-    """Plots the classification report and the confusion matrix."""
-
-    conf_matrix = confusion_matrix(y, y_predict)
-    labels = np.unique(y)
-    df_cm = pd.DataFrame(conf_matrix, index=[i for i in labels], columns=[i for i in labels])
-
-    clf_report = classification_report(y, y_predict, output_dict=True)
-    df_clf = pd.DataFrame(clf_report).iloc[:, :-3].T
-
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 5))
-
-    fig.suptitle(title)
-
-    hm1 = sns.heatmap(df_cm, annot=True, fmt='g', cmap='crest', ax=ax1)
-    hm1.set(title='Confusion matrix', xlabel='Predicted', ylabel='True')
-
-    # adjusts heatmap so that ``support`` column is white
-    norm = plt.Normalize(vmin=df_clf.iloc[:-1, :-1].min().min(), vmax=df_clf.iloc[:, :-1].max().max())
-    cmap = plt.get_cmap('crest')
-    cmap.set_over('white')
-
-    hm2 = sns.heatmap(
-        data=df_clf.copy(),
-        xticklabels=df_clf.columns,
-        yticklabels=df_clf.index,
-        annot=df_clf.round(2),
-        cmap=cmap,
-        ax=ax2,
-        norm=norm,
-        fmt='.5g',
-    )
-    hm2.set(title='Classification report')
-    matplotlib.rcParams['axes.unicode_minus'] = False
-    plt.show()
+from evaluation.plot import plot_evaluation
 
 
 def _cross_val_predict(X: Sequence, y: Sequence, y_test: Sequence, splits: Generator, cv):
-    """Custom ``cross_val_predict``.
+    """Custom `cross_val_predict`.
 
-    ``cross_validate`` and ``cross_val_score`` only returns scores, insufficient for confusion matrix
-    ``cross_val_predict`` does what we need, but cannot take test-set that is different in size than y
+    `cross_validate` and `cross_val_score` only returns scores, insufficient for confusion matrix
+    `cross_val_predict` does what we need, but cannot take test-set that is different in size than y
         which is the case for our BoostedKFold() split
     """
     y_predictions = np.empty(len(y_test))

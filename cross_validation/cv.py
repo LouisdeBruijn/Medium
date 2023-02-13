@@ -44,7 +44,7 @@ class BoostedKFold:
             train (ndarray): The training set indices for that split.
             test (ndarray): The testing set indices for that split.
         """
-        # separate boosted sample data that have group ``-1``, from random sample data
+        # separate boosted sample data that have group `-1`, from random sample data
         boosted_indices = np.where(groups == -1)[0]
         random_indices = np.where(groups != -1)[0]
 
